@@ -60,11 +60,10 @@ const Comment = new Schema ({
 | :------: | -------------------------------------------------- | ----------- |
 |   User   | Puede: login/logout, crear, leer, comentar otros   |   admin:    |
 |          |  posts y editar sus propios posts                  |    false    |
-| -------- | -------------------------------------------------- | ----------- |
 |          | Puede: login/logout, crear, leer, comentar, editar |   admin:    |
 |   Admin  | borrar cualquier comentario o post                 |    true     |
 |          | (opcional: expulsar uusuarios)                     |             |
-| -------- | -------------------------------------------------- | ----------- |
+
 
 ## Rutas
 
