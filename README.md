@@ -31,7 +31,7 @@ const User = new Schema ({
     image: String,
     info: String,
     pinPersonal: [ { type: Schema.Types.ObjectId, ref: "Post" } ],
-    pinFav: [ { type: Schema.Types.ObjectId, ref: "Comment" } ],
+    pinFav: [ { type: Schema.Types.ObjectId, ref: "Post" } ],
     admin: Boolean,
 })
 ```
@@ -43,7 +43,7 @@ const Post = new Schema ({
     direction: {type: String, required: true },
     comment: {type: String, required: true },
     usersComments: [ { type: Schema.Types.ObjectId, ref: "User" } ],
-    author: [ { type: Schema.Types.ObjectId, ref: "User" } ],
+    author: { type: Schema.Types.ObjectId, ref: "User" },
 })
 ```
 ```js
@@ -51,7 +51,7 @@ const Comment = new Schema ({
     title: {type: String, required: true },
     comment: {type: String, required: true },
     image: String,
-    author: [ { type: Schema.Types.ObjectId, ref: "User" } ],
+    author: { type: Schema.Types.ObjectId, ref: "User" },
 })
 ```
 ## Roles de usuarios
