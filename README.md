@@ -23,7 +23,7 @@ cd map-recs
 npm install
 
 ## Models
-
+```js
 const User = new Schema ({
     name: { type: String, required: true },
     password: {type: String, required: true },
@@ -34,7 +34,8 @@ const User = new Schema ({
     pinFav: [ { type: Schema.Types.ObjectId, ref: "Comment" } ],
     admin: Boolean,
 })
-
+```
+```js
 const Post = new Schema ({
     image: String,
     namePlace: {type: String, required: true },
@@ -44,25 +45,26 @@ const Post = new Schema ({
     usersComments: [ { type: Schema.Types.ObjectId, ref: "User" } ],
     author: [ { type: Schema.Types.ObjectId, ref: "User" } ],
 })
-
+```
+```js
 const Comment = new Schema ({
     title: {type: String, required: true },
     comment: {type: String, required: true },
     image: String,
     author: [ { type: Schema.Types.ObjectId, ref: "User" } ],
 })
-
+```
 ## Roles de usuarios
 
 |  Clase   |                    Permisos                        | Propiedades |
 | :------: | -------------------------------------------------- | ----------- |
 |   User   | Puede: login/logout, crear, leer, comentar otros   |   admin:    |
 |          |  posts y editar sus propios posts                  |    false    |
-| :------: | -------------------------------------------------- | ----------- |
+| -------- | -------------------------------------------------- | ----------- |
 |          | Puede: login/logout, crear, leer, comentar, editar |   admin:    |
 |   Admin  | borrar cualquier comentario o post                 |    true     |
 |          | (opcional: expulsar uusuarios)                     |             |
-| :------: | -------------------------------------------------- | ----------- |
+| -------- | -------------------------------------------------- | ----------- |
 
 ## Rutas
 
