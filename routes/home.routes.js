@@ -6,7 +6,7 @@ router.get("/map", (req, res, next) => {
 })
 
 router.post("/map", (req, res, next) => {
-
+    // ESCOGER CATEGORIAS
 })
 
 router.get("/list", (req, res, next) => {
@@ -14,7 +14,7 @@ router.get("/list", (req, res, next) => {
 })
 
 router.post("/list", (req, res, next) => {
-
+    // ESCOGER CATEGORIAS
 })
 
 

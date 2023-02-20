@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -6,12 +7,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{appTitle}}</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <style>
+  #map {
+    height: 100%;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
   </head>
 
   <body>
 
     {{{body}}}
 
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCly7nIyBiSArEP0NzrfqfOBqByTCDEh4g&libraries=places&callback=initMap">
+</script>
+    <script type="text/javascript" src="/js/mapsAPI.js"></script>
     <script src="/js/script.js"></script>
   </body>
 

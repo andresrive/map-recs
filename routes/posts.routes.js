@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const homeRoutes = require("./routes/home.routes");
-app.use("/home", homeRoutes);
+// const homeRoutes = require("./routes/home.routes");
+// app.use("/home", homeRoutes);
 
 
 router.get("/new", (req, res, next) => {

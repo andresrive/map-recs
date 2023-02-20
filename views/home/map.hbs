@@ -1,0 +1,36 @@
+    <div class="pac-card" id="pac-card">
+        <div id="title">Autocomplete search</div>
+        <div id="type-selector" class="pac-controls">
+          <input
+            type="radio"
+            name="type"
+            id="changetype-all"
+            checked="checked"
+          />
+          <label for="changetype-all">All</label>
+
+          <input type="radio" name="type" id="changetype-establishment" />
+          <label for="changetype-establishment">establishment</label>
+
+          <input type="radio" name="type" id="changetype-address" />
+          <label for="changetype-address">Address</label>
+
+          <input type="radio" name="type" id="changetype-geocode" />
+          <label for="changetype-geocode">geocode</label>
+
+          <input type="radio" name="type" id="changetype-cities" />
+          <label for="changetype-cities">(cities)</label>
+
+          <input type="radio" name="type" id="changetype-regions" />
+          <label for="changetype-regions">(regions)</label>
+        </div>
+        <br />
+      <div id="pac-container">
+        <input id="pac-input" type="text" placeholder="Search..." />
+      </div>
+    </div>
+    <div id="map"></div>
+    <div id="infowindow-content">
+      <span id="place-name" class="title"></span><br />
+      <span id="place-address"></span>
+    </div>
