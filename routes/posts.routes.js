@@ -1,11 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-const homeRoutes = require("./routes/home.routes");
-app.use("/home", homeRoutes);
+/* const homeRoutes = require("./routes/home.routes");
+app.use("/home", homeRoutes); */
+const User = require("../models/User.model");
+const Post = require("../models/Post.model");
+const Comment = require("../models/Comment.model");
 
 
 router.get("/new", (req, res, next) => {
+    /* User.find()
+    .then(result => {
+        res.render("home/post/new-post", {result})
+    })
+    .catch(err => next(err)) */
     res.render("home/post/new-post")
 })
 
