@@ -21,11 +21,11 @@ router.get("/signup", isLoggedOut, (req, res) => {
 });
 
 // POST /auth/signup
-router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, email, password } = req.body;
+router.post("/signup", isLoggedOut, (req, res, next) => {
+  const { username, city, password } = req.body;
 
   // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  if (username === "" || city === "" || password === "") {
     res.status(400).render("auth/signup", {
       errorMessage:
         "All fields are mandatory. Please provide your username, email and password.",
@@ -61,23 +61,24 @@ router.post("/signup", isLoggedOut, (req, res) => {
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
       // Create a user and save it in the database
-      return User.create({ username, email, password: hashedPassword });
+      return User.create({ username, city, password: hashedPassword });
     })
     .then((user) => {
       res.redirect("/auth/login");
     })
-    .catch((error) => {
-      if (error instanceof mongoose.Error.ValidationError) {
-        res.status(500).render("auth/signup", { errorMessage: error.message });
+    .catch(err => next(err))
+     .catch((error) => {
+       if (error instanceof mongoose.Error.ValidationError) {
+        res.status(500).render("auth/signup", { errorMessage: error.message }); 
       } else if (error.code === 11000) {
         res.status(500).render("auth/signup", {
           errorMessage:
             "Username and email need to be unique. Provide a valid username or email.",
         });
       } else {
-        next(error);
+        next(error); 
       }
-    });
+    }); 
 });
 
 // GET /auth/login
@@ -108,7 +109,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   }
 
   // Search the database for a user with the email submitted in the form
-  User.findOne({ email })
+  User.findOne({ username })
     .then((user) => {
       // If the user isn't found, send an error message that user provided wrong credentials
       if (!user) {

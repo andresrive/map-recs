@@ -1,0 +1,19 @@
+{{#if message}}
+    <p>{{message}}</p>
+{{/if}}
+
+{{#each result}}
+<h2>{{namePlace}}</h2>
+<div>
+    <p>{{nameCategory}}</p>
+    <p>{{direction}}</p>
+    <p>{{comment}}</p>
+    <p class="comments">Comentarios: {{usersComments.length}}</p>
+</div>
+
+<form action="/post/{{_id}}/delete" method="post">
+<button type="submit">Delete: {{namePlace}}</button>
+</form>
+<a href="../post/{{_id}}">Agregar comentario</a><br>
+<a href="../post/{{_id}}/edit"> editar</a>
+{{/each}}
