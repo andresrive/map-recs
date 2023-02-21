@@ -19,6 +19,12 @@ router.get("/login", (req, res, next) => {
 })
 
 router.post("/login", (req, res, next) => {
+  let {username, password} = req.body;
+
+  if(username == "" || password == "") {
+    res.render("auth/login", { mensajeError: "Faltan campos" });
+    return;
+  } 
 
 })
 
