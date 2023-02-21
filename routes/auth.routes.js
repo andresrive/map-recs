@@ -43,12 +43,11 @@ router.post("/signup", isLoggedOut, (req, res) => {
     return;
   }
 
-  if (password != passwordRepeat) {
+  else if (password != passwordRepeat) {
     res.status(400).render("auth/signup", {
-      errorMessage: "Your password needs to match your repeat password",
+      errorMessage: "The password input should match the repeat password input.",
     });
-
-    return;
+    return
   }
 
   //   ! This regular expression checks password for special characters and minimum length
@@ -83,12 +82,12 @@ router.post("/signup", isLoggedOut, (req, res) => {
       } else if (error.code === 11000) {
         res.status(500).render("auth/signup", {
           errorMessage:
-            "Username and email need to be unique. Provide a valid username or email.",
+            "This username is already taken.",
         });
       } else {
-        next(error);
+        next(error); 
       }
-    });
+    }); 
 });
 
 // GET /auth/login

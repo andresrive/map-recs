@@ -2,22 +2,23 @@ const { Schema, model } = require("mongoose");
 
 
 const userSchema = new Schema ({
-  name: { 
+  username: { 
       type: String, 
-      required: true 
+      required: true,
+      unique: true 
   },
   password: {
-      type: String,
-      required: true
+    type: String,
+    required: true
   },
   city: {
-      type: String,
-      required: true
+    type: String,
+    // required: true
   },
   image: String,
   info: String,
-  pinPersonal: [ { type: Schema.Types.ObjectId, ref: "Post" } ],
-  pinFav: [ { type: Schema.Types.ObjectId, ref: "Post" } ],
+  pinPersonal: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  pinFav: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   admin: Boolean,
 },
   {
