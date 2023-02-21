@@ -103,8 +103,8 @@ router.get("/:id/edit", (req, res, next) => {
 router.post("/:id/edit", (req, res, next) => {
     let { namePlace, nameCategory, direction, comment } = req.body;
     let postId = req.params.id;
-    
-    Post.findOneAndUpdate(postId, {
+    console.log("PRIMER CONSOL:", req.body)
+    Post.findByIdAndUpdate(postId, {
       namePlace, 
       nameCategory, 
       direction, 
@@ -118,6 +118,7 @@ router.post("/:id/edit", (req, res, next) => {
       }
     }) */
     .then(result => {
+      console.log("resultado AAAAAA: ", result)
         res.redirect(`/post/${postId}`);
     })
     .catch(err => next(err));
