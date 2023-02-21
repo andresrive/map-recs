@@ -34,7 +34,7 @@ const homeRoutes = require("./routes/home.routes");
 app.use("/home", homeRoutes);
 
 const postsRoutes = require("./routes/posts.routes");
-app.use("/home/post", postsRoutes);
+app.use("/post", postsRoutes);
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

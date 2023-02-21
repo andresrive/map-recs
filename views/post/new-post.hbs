@@ -1,14 +1,19 @@
-<form action="/home/post/new-post" class="post">
-    <label for="title">Title:</label>
+<form action="/post/new" method="POST" enctype="multipart/form-data">
+    <label for="namePlace">Title:</label>
     <input type="text" name="namePlace">
-    <label for="category">Category:</label>
+    
+    <label for="nameCategory">Category:</label>
     <input type="text" name="nameCategory">
+
     <label for="direction">Direction:</label>
     <input type="text" name="direction">
+
     <label for="comment">Comment:</label>
     <input type="text" name="comment">
+
     <label for="image">Imagen:</label>
-    <input type="file" name="image" id="image" multiple/>
+    <input type="file" name="image" id="image"/>
+
     <button type="submit">Creat new place!</button>
 
 
