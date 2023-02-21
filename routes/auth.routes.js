@@ -22,10 +22,10 @@ router.get("/signup", isLoggedOut, (req, res) => {
 
 // POST /auth/signup
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, city, password, passwordRepeat } = req.body;
+  const { username, email, password } = req.body;
 
-  // Check that username, city, and password are provided
-  if (username === "" || city === "" || password === "") {
+  // Check that username, email, and password are provided
+  if (username === "" || email === "" || password === "") {
     res.status(400).render("auth/signup", {
       errorMessage:
         "All fields are mandatory. Please provide your username, city and password.",
@@ -73,18 +73,19 @@ router.post("/signup", isLoggedOut, (req, res) => {
     .then((user) => {
       res.redirect("/auth/login");
     })
-    .catch((error) => {
-      if (error instanceof mongoose.Error.ValidationError) {
-        res.status(500).render("auth/signup", { errorMessage: error.message });
+    .catch(err => next(err))
+     .catch((error) => {
+       if (error instanceof mongoose.Error.ValidationError) {
+        res.status(500).render("auth/signup", { errorMessage: error.message }); 
       } else if (error.code === 11000) {
         res.status(500).render("auth/signup", {
           errorMessage:
             "This username is already taken.",
         });
       } else {
-        next(error);
+        next(error); 
       }
-    });
+    }); 
 });
 
 // GET /auth/login
@@ -114,8 +115,8 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     });
   }
 
-  // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  // Search the database for a user with the email submitted in the form
+  User.findOne({ email })
     .then((user) => {
       // If the user isn't found, send an error message that user provided wrong credentials
       if (!user) {

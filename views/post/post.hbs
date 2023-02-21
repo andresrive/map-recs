@@ -1,33 +1,32 @@
-<h2>{{namePlace}}</h2>
+
+<h2>{{post.namePlace}}</h2>
 <div>
-  {{comment}}
+  <p>{{post.comment}}</p>
   <br>
-  - by {{author.username}}
+ <p> Created by {{post.author.username}}</p>
 </div>
 <div class="imagePlace">
-    <img src="{{image}}" alt="{{namePlace}}">
+    <img src="{{post.image}}" alt="{{post.namePlace}}">
 </div>
-
-{{#unless comments}}
+<br>
+{{#unless post.usersComments}}
   <p>No comments yet!</p>
 {{/unless}}
 
-{{#each comments}}
-  <p><b>{{this.author.username}}:</b> {{this.comment}}</p>
+{{#each post.usersComments}}
+  <p><b>{{this.title}}:</b> {{this.comment}}</p>
 {{/each}}
 
 <h3>Add comment</h3>
 
-<form action="/posts/{{_id}}/comment" method="post">
-  <label> Your username:
-    <input type="text" name="authorComment"/>
-  </label>
-
-  <input type="text" name="postAuthor" value="{{author.username}}" hidden />
-  <textarea name="content" cols="30" rows="2"></textarea>
+<form action="/post/{{post._id}}" method="post">
+  <label> Current User: {{user}}</label>
+  <input type="text" name="title" placeholder="Write a title..">
+  <input type="text" name="comment" placeholder="Write you comment here..."/>
 
   <button type="submit">Comment</button>
 </form>
 
 <br>
-<a href="/users/{{author._id}}/posts">See all {{author.username}}'s posts </a>
+
+<a href="{{post.author._id}}/post">See all {{post.author.username}}'s posts </a>

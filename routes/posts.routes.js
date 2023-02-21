@@ -13,32 +13,49 @@ router.get("/new", (req, res, next) => {
 });
 
 router.post("/new", upload.single("image"), (req, res, next) => {
+  let author = req.session.currentUser._id;
   let { namePlace, nameCategory, direction, comment } = req.body;
   if (namePlace == "" || nameCategory == "" || direction == "" || comment == "") {
     res.render("post/new-post", { message: "FAlta algun campo por completar!" })
     return
   }
-  // if (req.files.length > 0) {
+  if (!req.file) {
   Post.create({
     namePlace,
     nameCategory,
     direction,
     comment,
-    image: req.file.path
-    // author: req.session.id falta armar auth
+    author
   })
     .then((response) => {
-      // return User.findByIdAndUpdate(author, {$push: { pinPersonal: response._id}});
-      res.redirect("/");
+      return User.findByIdAndUpdate(author, {$push: { pinPersonal: response._id}});
     })
+    .then(() => res.redirect("/"))
     .catch((err) => next(err));
+  } else {
+    Post.create({
+      namePlace,
+      nameCategory,
+      direction,
+      comment,
+      image: req.file.path,
+      author
+    })
+    .then((response) => {
+      return User.findByIdAndUpdate(author, {$push: { pinPersonal: response._id}});
+    })
+    .then(() => res.redirect("/"))
+    .catch((err) => next(err));
+  }
+  
   //}  else if (req.file.length == 0) {
 
   //}
 });
 
 router.get("/:id", (req, res, next) => {
-    const {postId} = req.params.id;//lo recibimos de /map o /list cualquierda de los dos
+    let user = req.session.currentUser.username;
+  const postId = req.params.id;
     Post.findById(postId)
     .populate("author usersComments")
     .populate({
@@ -49,45 +66,81 @@ router.get("/:id", (req, res, next) => {
       }
     })
     .then(result => {
-        res.render("post/post", {post: result}); // mirar ruta, medio rara en navegador no se ve bien
+      let data = {
+        post: result,
+        user
+      }
+      //console.log("data: ", data.post.usersComments)
+        res.render("post/post", data); 
     })
     .catch(err => next(err));
 });
 
+  router.post("/:id", (req, res, next) => {
+  //console.log("params:", req.params)
+  let postId = req.params.id
+  let {title, comment} = req.body
+  Comment.create({title, comment})
+  .then(response => {
+    console.log("respo:", response._id)
+    return Post.findByIdAndUpdate(postId, {$push: { usersComments: response._id}});
+  })
+  .then(() => res.redirect("/home/list"))
+  .catch(err => next(err));
+}) 
+
 router.get("/:id/edit", (req, res, next) => {
-    const {postId} = req.params.id;
+  //console.log("a ver que es esto", req.params.id)
+    const postId = req.params.id;
     Post.findById(postId)
     .populate("author")
     .then(result => {
-        res.render("post/post", result); //no se si esto te lleva aqui
+        res.render("post/edit", result);
     })
     .catch(err => next(err));
 });
 
 router.post("/:id/edit", (req, res, next) => {
     let { namePlace, nameCategory, direction, comment } = req.body;
-    let {postId} = req.params.id;
-    Post.findOneAndUpdate(postId, {namePlace, nameCategory, direction, comment}, {new : true} ) 
-    .populate("author usersComments")
+    let postId = req.params.id;
+    
+    Post.findOneAndUpdate(postId, {
+      namePlace, 
+      nameCategory, 
+      direction, 
+      comment}, {new : true} ) 
+/*     .populate("author usersComments")
     .populate({
-      path: "usersComments",
+      path: "usersComments",  MIRAR ESTO
       populate: {
         path: "author",
         model: "User"
       }
-    })
+    }) */
     .then(result => {
-        res.render("post/post", {post: result});
+        res.redirect(`/post/${postId}`);
     })
     .catch(err => next(err));
 });
+
+router.get("/:id/post", (req, res, next) => {
+  const postId = req.params.id;
+  User.findById(postId)
+  .populate('pinPersonal')
+  .then(result => {
+    console.log("postUSER :", result)
+    res.render("post/postUser", result)
+  })
+  .catch(err => next(err));
+})
 
 router.post("/:id/delete", (req, res, next) => {
     let postId = req.params.id;
     Post.findByIdAndDelete(postId)
     .then(result => {
-        res.redirect("/home/list", {message: "El post ha sido elimindo"})
+        res.redirect("/home/list")
     })
+    .catch(err => next(err));
 });
 
 module.exports = router;
