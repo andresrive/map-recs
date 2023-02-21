@@ -6,15 +6,12 @@
         </div>
     {{/if}}
    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" name="username">
-        <input type="text" class="form-control" id="floatingInput" name="username">
-        <label for="floatingInput">Username</label>
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="name">
+        <label for="floatingInput">Name</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" name="city">
-        <label for="floatingCity">City</label>
-        <input type="text" class="form-control" id="floatingInput" name="city">
-        <label for="floatingEmail">City</label>
+        <input type="text" class="form-control" id="floatingInput" placeholder="city" name="city">
+        <label for="floatingInput">City</label>
     </div>
 
     <div class="form-floating mb-3">
@@ -29,7 +26,10 @@
     </div>
 
  <button type="submit" class="btn btn-primary">Sign up</button>
-    <a class="btn btn-link" href="/auth/login">I'm already registered</a>
+
+<button onclick="location.href='/auth/login'" type="button" class="btn btn-primary">
+         I already signed up. I need to log in</button>
+
 
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>

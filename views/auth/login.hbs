@@ -2,15 +2,19 @@
   <h2>Log In</h2>
 
   <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" name="username">
-        <label for="floatingInput">Username</label>
+        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+        <label for="floatingInput">Name</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="floatingPassword" name="password">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
         <label for="floatingPassword">Password</label>
     </div>
+
+    <button onclick= location.href='/post/profile' type="button" class="btn btn-primary">
+         Sign up</button>
+
     <button type="submit" class="btn btn-primary">Log in</button>
-    <a class="btn btn-link" href="/auth/signup">I'm not registered</a>
+
 
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
