@@ -8,7 +8,7 @@ Somos Andres, Roberto y Eugenio, somos compañeros del bootcamp y estamos desarr
 
 ## Deployment
 
-You can play the game [here](#)
+You can play the game [here](#https://map-recs.fly.dev/)
 
 ## Estructura de trabajo
 
