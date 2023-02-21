@@ -1,24 +1,32 @@
-<div id="form">
   <h2>Sign Up</h2>
-  <form action="/auth/signup" method="POST">
+  <form action="/auth/signup" method="POST" class="w-50 mx-auto">
+  {{#if mensajeError}}
+        <div class="alert alert-danger" role="alert">
+            {{mensajeError}}
+        </div>
+    {{/if}}
+   <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+        <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="Password" name="email">
+        <label for="floatingEmail">Email</label>
+    </div>
 
-    <label> Username
-      <input type="text" name="username" placeholder="Your username" />
-    </label>
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+        <label for="floatingPassword">Password</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="passwordRepeat">
+        <label for="floatingPassword">Repeat password</label>
+    </div>
 
-    <label> Email
-      <input type="email" name="email" placeholder="Your email" />
-    </label>
-
-    <label> Password
-      <input type="password" name="password" placeholder="Your password" />
-    </label>
-
-    <button type="submit">Sign Up</button>
-
+ <button type="submit" class="btn btn-primary">Sign up</button>
+    <a class="btn btn-link" href="/auth/login">You are registered</a>
 
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
     {{/if}}
   </form>
-</div>
