@@ -38,7 +38,7 @@ router.post("/new", upload.single("image"),  (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
-    const {postId} = req.params;//lo recibimos de /map o /list cualquierda de los dos
+    const {postId} = req.params.id;//lo recibimos de /map o /list cualquierda de los dos
     Post.findById(postId)
     .populate("author usersComments")
     .populate({
@@ -49,24 +49,24 @@ router.get("/:id", (req, res, next) => {
         }
     })
     .then(result => {
-        res.render("/post/post", {post: result}); // mirar ruta, medio rara en navegador no se ve bien
+        res.render("post/post", {post: result}); // mirar ruta, medio rara en navegador no se ve bien
     })
     .catch(err => next(err));
 });
 
 router.get("/:id/edit", (req, res, next) => {
-    const {postId} = req.params;
+    const {postId} = req.params.id;
     Post.findById(postId)
     .populate("author")
     .then(result => {
-        res.render("/post/post", result); //no se si esto te lleva aqui
+        res.render("post/post", result); //no se si esto te lleva aqui
     })
     .catch(err => next(err));
 });
 
 router.post("/:id/edit", (req, res, next) => {
     let { namePlace, nameCategory, direction, comment } = req.body;
-    let {postId} = req.params;
+    let {postId} = req.params.id;
     Post.findOneAndUpdate(postId, {namePlace, nameCategory, direction, comment}, {new : true} ) 
     .populate("author usersComments")
     .populate({
@@ -77,11 +77,17 @@ router.post("/:id/edit", (req, res, next) => {
         }
     })
     .then(result => {
-        res.render("/post/post", {post: result});
+        res.render("post/post", {post: result});
     })
     .catch(err => next(err));
 });
 
-router.post("/:id/delete", (req, res, next) => {});
+router.post("/:id/delete", (req, res, next) => {
+    let postId = req.params.id;
+    Post.findByIdAndDelete(postId)
+    .then(result => {
+        res.redirect("/home/list", {message: "El post ha sido elimindo"})
+    })
+});
 
 module.exports = router;
