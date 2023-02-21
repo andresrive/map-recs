@@ -25,7 +25,7 @@ function initMap() {
     const options = {
         fields: ["formatted_address", "geometry", "name"],
         strictBounds: false,
-        types: ["establishment"],
+        types: ["address"],
     };
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
@@ -49,10 +49,12 @@ function initMap() {
     marker.addListener("click", toggleBounce);
 
     autocomplete.addListener("place_changed", () => {
+
         infowindow.close();
         marker.setVisible(false);
 
         const place = autocomplete.getPlace();
+        console.log(place)
 
         if (!place.geometry || !place.geometry.location) {
             // User entered the name of a Place that was not suggested and
@@ -77,6 +79,8 @@ function initMap() {
         infowindow.open(map, marker);
     });
 
+    autocomplete.setTypes(["address"])
+
     // Sets a listener on a radio button to change the filter type on Places
     // Autocomplete.
     function setupClickListener(id, types) {
@@ -88,12 +92,12 @@ function initMap() {
         });
     }
 
-    setupClickListener("changetype-all", []);
-    setupClickListener("changetype-address", ["address"]);
-    setupClickListener("changetype-establishment", ["establishment"]);
-    setupClickListener("changetype-geocode", ["geocode"]);
-    setupClickListener("changetype-cities", ["(cities)"]);
-    setupClickListener("changetype-regions", ["(regions)"]);
+    // setupClickListener("changetype-all", []);
+    // setupClickListener("changetype-address", ["address"]);
+    // setupClickListener("changetype-establishment", ["establishment"]);
+    // setupClickListener("changetype-geocode", ["geocode"]);
+    // setupClickListener("changetype-cities", ["(cities)"]);
+    // setupClickListener("changetype-regions", ["(regions)"]);
     biasInputElement.addEventListener("change", () => {
         if (biasInputElement.checked) {
             autocomplete.bindTo("bounds", map);

@@ -18,8 +18,4 @@ router.post("/list", (req, res, next) => {
 })
 
 
-
-
-
-
 module.exports = router;
