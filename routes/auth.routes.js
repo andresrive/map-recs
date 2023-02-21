@@ -22,13 +22,14 @@ router.get("/signup", isLoggedOut, (req, res) => {
 
 // POST /auth/signup
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, email, password } = req.body;
+  console.log(req.body)
+  const { name, password, passwordRepeat, city } = req.body;
 
-  // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  // Check that username, password, and city are provided
+  if (name === "" || password === "" || city === "" || passwordRepeat === '') {
     res.status(400).render("auth/signup", {
       errorMessage:
-        "All fields are mandatory. Please provide your username, email and password.",
+        "All fields are mandatory. Please provide your username, password and city.",
     });
 
     return;
@@ -37,6 +38,14 @@ router.post("/signup", isLoggedOut, (req, res) => {
   if (password.length < 6) {
     res.status(400).render("auth/signup", {
       errorMessage: "Your password needs to be at least 6 characters long.",
+    });
+
+    return;
+  }
+
+  if (password != passwordRepeat) {
+    res.status(400).render("auth/signup", {
+      errorMessage: "Your password needs to match your repeat password",
     });
 
     return;
@@ -61,13 +70,15 @@ router.post("/signup", isLoggedOut, (req, res) => {
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
       // Create a user and save it in the database
-      return User.create({ username, email, password: hashedPassword });
+      return User.create({ name, password: hashedPassword, city });
     })
     .then((user) => {
-      res.redirect("/auth/login");
+      console.log("usuario creado: ", user)
+      res.redirect("/post/profile");
     })
     .catch((error) => {
-      if (error instanceof mongoose.Error.ValidationError) {
+      console.log(error)
+     if (error instanceof mongoose.Error.ValidationError) {
         res.status(500).render("auth/signup", { errorMessage: error.message });
       } else if (error.code === 11000) {
         res.status(500).render("auth/signup", {
@@ -87,10 +98,10 @@ router.get("/login", isLoggedOut, (req, res) => {
 
 // POST /auth/login
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, password } = req.body;
+  const { name, password } = req.body;
 
   // Check that username, email, and password are provided
-  if (username === "" ||  password === "") {
+  if (name === "" ||  password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
         "All fields are mandatory. Please provide username, and password.",
@@ -99,16 +110,17 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     return;
   }
 
-  // Here we use the same logic as above
-  // - either length based parameters or we check the strength of a password
-  if (password.length < 6) {
-    return res.status(400).render("auth/login", {
-      errorMessage: "Your password needs to be at least 6 characters long.",
-    });
-  }
+    User.find({password})
+  .then(results => {
+    if(results.length < 6) {
+      res.render("auth/login", { mensajeError: "Credenciales incorrectas" });
+      return;
+    }
+})
+.catch(err => next(err));
 
   // Search the database for a user with the email submitted in the form
-  User.findOne({ email })
+  User.findOne({ name })
     .then((user) => {
       // If the user isn't found, send an error message that user provided wrong credentials
       if (!user) {
@@ -134,12 +146,12 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           // Remove the password field
           delete req.session.currentUser.password;
 
-          res.redirect("/");
+          res.redirect("/post/profile");
         })
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
     })
     .catch((err) => next(err));
-});
+  });
 
 // GET /auth/logout
 router.get("/logout", isLoggedIn, (req, res) => {
