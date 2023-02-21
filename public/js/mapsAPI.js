@@ -1,24 +1,27 @@
+// const Post = require("../../models/Post.model")
 
+let coordenadas = document.getElementById("direction").value
+console.log(coordenadas)
+
+let marker
 function initMap() {
     const myLatLng = { lat: 41.38879, lng: 2.15899 }
     const map = new google.maps.Map(document.getElementById("map"), {
         center: myLatLng,
         zoom: 13,
         mapTypeControl: false,
-        mapId: '31c61b2a8f3ed6f9'
+        mapId: '31c61b2a8f3ed6f9',
+        streetViewControl: false
     });
 
-    const card = document.getElementById("pac-card");
+
     const input = document.getElementById("pac-input");
-    const biasInputElement = document.getElementById("use-location-bias");
-    const strictBoundsInputElement = document.getElementById("use-strict-bounds");
     const options = {
         fields: ["formatted_address", "geometry", "name"],
         strictBounds: false,
-        types: ["address"],
+        types: [],
     };
 
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
 
     const autocomplete = new google.maps.places.Autocomplete(input, options);
 
@@ -30,13 +33,39 @@ function initMap() {
 
     infowindow.setContent(infowindowContent);
 
-    const marker = new google.maps.Marker({
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-        map,
-        anchorPoint: new google.maps.Point(0, -29),
-    });
+
+
+
+    const features = [
+        {
+            position: new google.maps.LatLng(41.39550664355469, 2.1620292786643365),
+            type: "info",
+        },
+        {
+            position: new google.maps.LatLng(41.38428068389497, 2.176468720113538),
+            type: "info",
+        },
+        {
+            position: new google.maps.LatLng(41.39117708987904, 2.180684436927278),
+            type: "info",
+        }]
+
+    for (let i = 0; i < features.length; i++) {
+        marker = new google.maps.Marker({
+            position: features[i].position,
+            map: map,
+            animation: google.maps.Animation.DROP,
+        });
+    }
+
+    // const marker = new google.maps.Marker({
+    //     draggable: true,
+    //     animation: google.maps.Animation.DROP,
+    //     map,
+    //     anchorPoint: new google.maps.Point(0, -29),
+    // });
     marker.addListener("click", toggleBounce);
+
 
     autocomplete.addListener("place_changed", () => {
 
@@ -69,51 +98,9 @@ function initMap() {
         infowindow.open(map, marker);
     });
 
-    autocomplete.setTypes(["address"])
+    autocomplete.setTypes(["all"])
 
-    // Sets a listener on a radio button to change the filter type on Places
-    // Autocomplete.
-    function setupClickListener(id, types) {
-        const radioButton = document.getElementById(id);
 
-        radioButton.addEventListener("click", () => {
-            autocomplete.setTypes(types);
-            input.value = "";
-        });
-    }
-
-    // setupClickListener("changetype-all", []);
-    // setupClickListener("changetype-address", ["address"]);
-    // setupClickListener("changetype-establishment", ["establishment"]);
-    // setupClickListener("changetype-geocode", ["geocode"]);
-    // setupClickListener("changetype-cities", ["(cities)"]);
-    // setupClickListener("changetype-regions", ["(regions)"]);
-    biasInputElement.addEventListener("change", () => {
-        if (biasInputElement.checked) {
-            autocomplete.bindTo("bounds", map);
-        } else {
-            // User wants to turn off location bias, so three things need to happen:
-            // 1. Unbind from map
-            // 2. Reset the bounds to whole world
-            // 3. Uncheck the strict bounds checkbox UI (which also disables strict bounds)
-            autocomplete.unbind("bounds");
-            autocomplete.setBounds({ east: 180, west: -180, north: 90, south: -90 });
-            strictBoundsInputElement.checked = biasInputElement.checked;
-        }
-
-        input.value = "";
-    });
-    strictBoundsInputElement.addEventListener("change", () => {
-        autocomplete.setOptions({
-            strictBounds: strictBoundsInputElement.checked,
-        });
-        if (strictBoundsInputElement.checked) {
-            biasInputElement.checked = strictBoundsInputElement.checked;
-            autocomplete.bindTo("bounds", map);
-        }
-
-        input.value = "";
-    });
 
     function toggleBounce() {
         if (marker.getAnimation() !== null) {
@@ -122,10 +109,8 @@ function initMap() {
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }
     }
+
 }
 
 window.initMap = initMap;
 
-
-
-// module.exports = initMap
