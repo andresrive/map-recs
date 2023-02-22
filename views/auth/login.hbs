@@ -1,4 +1,4 @@
-<form action="/auth/login" method="POST" class="w-50 mx-auto">
+{{!-- <form action="/auth/login" method="POST" class="w-50 mx-auto">
   <h2>Log In</h2>
 
   <div class="form-floating mb-3">
@@ -10,6 +10,11 @@
         <label for="floatingPassword">Password</label>
     </div>
 
+<<<<<<< HEAD
+=======
+    <button onclick= location.href='/auth/signup' type="button" class="btn btn-primary">
+         Sign up</button>
+>>>>>>> 04f1042679e2294af7e4bf7e179a397eb2c3bb08
 
     <button type="submit" class="btn btn-primary">Log in</button>
     
@@ -19,4 +24,26 @@
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
     {{/if}}
-  </form>
+  </form> --}}
+
+
+
+<style>
+body {background-image: url("/images/fondoPantallas.avif");
+background-size: cover;}
+</style>
+
+<div class="d-flex justify-content-center ">
+<form action="/auth/login" method="POST" class="form" >
+    <p class="heading">Login</p>
+    <input class="input" placeholder="Username" type="text" name="username">
+    <input class="input" placeholder="Password" type="password" name="password"> 
+    <button type="submit" class="btn">Log in</button>
+    <button onclick=location.href='/auth/signup' type="button" class="btn">Sign up</button>
+
+     {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+    {{/if}}
+</form>
+</div>
+
