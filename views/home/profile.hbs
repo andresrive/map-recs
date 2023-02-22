@@ -1,0 +1,19 @@
+<h1>Profile</h1>
+<div class="profile">
+  <img src="{{profilePictureUrl}}" alt="{{username}}" class="profile-picture">
+  <p>{{username}}</p>
+  <p>{{city}}</p>
+</div>
+    <label for="interests">My interests</label>
+    <input type="text" id="interests" name="interests">
+ {{#each }}
+    <h2>Favorites</h2 >
+    <p>{{pinPersonal}}</p>
+{{/each}}
+    <h2>My Pins</h2>
+    <p>{{??}}</p>
+
+    <button onclick="location.href='/post/postUser'" type="button" class="btn btn-primary">
+         Create post</button>
+
+  

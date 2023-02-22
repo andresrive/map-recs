@@ -5,6 +5,19 @@ const User = require("../models/User.model");
 const Post = require("../models/Post.model");
 const Comment = require("../models/Comment.model");
 
+
+
+router.get("/profile", (req, res, next)=> {
+    res.render("home/profile")
+});
+
+//router.post("/create-profile", (req,res, next)=>{
+
+//});
+
+
+
+
 router.get("/map", (req, res, next) => {
     res.render("home/map")
 })
