@@ -17,11 +17,17 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
+    latitud: {
+        type: Number,
+    },
+    longitud: {
+        type: Number,
+    },
     comment: {
         type: String,
         required: true
     },
-    usersComments: [ { type: Schema.Types.ObjectId, ref: "Comment" } ],
+    usersComments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     author: { type: Schema.Types.ObjectId, ref: "User" },
 },
     {

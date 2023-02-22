@@ -12,10 +12,10 @@ router.get("/new", (req, res, next) => {
   res.render("post/new-post");
 });
 
-router.post("/new",upload.any(), (req, res, next) => {
+router.post("/new", upload.any(), (req, res, next) => {
   let author = req.session.currentUser._id;
   let { namePlace, nameCategory, direction, comment, latitud, longitud } = req.body;
-  console.log("la foto:" , req.files)
+  console.log("la foto:", req.files)
   if (
     namePlace == "" ||
     nameCategory == "" ||
@@ -28,35 +28,38 @@ router.post("/new",upload.any(), (req, res, next) => {
     return;
   }
   if (req.files) {
-  Post.create({
-    namePlace,
-    nameCategory,
-    direction,
-    comment,
-    latitud,
-    longitud,
-    image: req.files[0].path,
-    author
-  })
-    .then((response) => {
-  
-      
-      return User.findByIdAndUpdate(author, {
-        $push: { pinPersonal: response._id },
-      });
+    Post.create({
+      namePlace,
+      nameCategory,
+      direction,
+      comment,
+      latitud,
+      longitud,
+      image: req.files[0].path,
+      author
     })
-    .then(() => res.redirect("/home/list"))
-    .catch((err) => next(err)); 
+      .then((response) => {
+
+
+        return User.findByIdAndUpdate(author, {
+          $push: { pinPersonal: response._id },
+        });
+      })
+      .then(() => res.redirect("/home/list"))
+      .catch((err) => next(err));
   } else {
     res.render("post/new-post", {
-      message: "FAlta algun campo por completar!"})
-    } 
-    
+      message: "FAlta algun campo por completar!"
+    })
+  }
+
   /* else if (!req.files) {
     Post.create({
       namePlace,
       nameCategory,
       direction,
+      latitud,
+      longitud,
       comment,
       author,
     })
