@@ -1,7 +1,7 @@
 // const Post = require("../../models/Post.model")
 
-let coordenadas = document.getElementById("direction").value
-console.log(coordenadas)
+// let coordenadas = document.getElementById("direction").value
+// console.log(coordenadas)
 
 let marker
 function initMap() {
@@ -28,10 +28,10 @@ function initMap() {
 
     autocomplete.bindTo("bounds", map);
 
-    const infowindow = new google.maps.InfoWindow();
-    const infowindowContent = document.getElementById("infowindow-content");
+    // const infowindow = new google.maps.InfoWindow();
+    // const infowindowContent = document.getElementById("infowindow-content");
 
-    infowindow.setContent(infowindowContent);
+    // infowindow.setContent(infowindowContent);
 
 
 
@@ -69,7 +69,7 @@ function initMap() {
 
     autocomplete.addListener("place_changed", () => {
 
-        infowindow.close();
+        // infowindow.close();
         marker.setVisible(false);
 
         const place = autocomplete.getPlace();
@@ -92,13 +92,13 @@ function initMap() {
 
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
-        infowindowContent.children["place-name"].textContent = place.name;
-        infowindowContent.children["place-address"].textContent =
-            place.formatted_address;
-        infowindow.open(map, marker);
+        // infowindowContent.children["place-name"].textContent = place.name;
+        // infowindowContent.children["place-address"].textContent =
+        //     place.formatted_address;
+        // infowindow.open(map, marker);
     });
 
-    autocomplete.setTypes(["all"])
+    // autocomplete.setTypes(["all"])
 
 
 

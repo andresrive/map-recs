@@ -23,10 +23,10 @@ router.get("/signup", isLoggedOut, (req, res) => {
 // POST /auth/signup
 router.post("/signup", isLoggedOut, (req, res) => {
   console.log(req.body)
-  const { name, password, passwordRepeat, city } = req.body;
+  const { username, password, passwordRepeat, city } = req.body;
 
   // Check that username, password, and city are provided
-  if (name === "" || password === "" || city === "" || passwordRepeat === '') {
+  if (username === "" || password === "" || city === "" || passwordRepeat === '') {
     res.status(400).render("auth/signup", {
       errorMessage:
         "All fields are mandatory. Please provide your username, password and city.",
@@ -69,15 +69,15 @@ router.post("/signup", isLoggedOut, (req, res) => {
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
       // Create a user and save it in the database
-      return User.create({ name, password: hashedPassword, city });
+      return User.create({ username, password: hashedPassword, city });
     })
     .then((user) => {
       console.log("usuario creado: ", user)
-      res.redirect("/post/profile");
+      res.redirect("/auth/login");
     })
     .catch((error) => {
       console.log(error)
-     if (error instanceof mongoose.Error.ValidationError) {
+      if (error instanceof mongoose.Error.ValidationError) {
         res.status(500).render("auth/signup", { errorMessage: error.message });
       } else if (error.code === 11000) {
         res.status(500).render("auth/signup", {
@@ -85,9 +85,9 @@ router.post("/signup", isLoggedOut, (req, res) => {
             "This username is already taken.",
         });
       } else {
-        next(error); 
+        next(error);
       }
-    }); 
+    });
 });
 
 // GET /auth/login
@@ -97,10 +97,10 @@ router.get("/login", isLoggedOut, (req, res) => {
 
 // POST /auth/login
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { name, password } = req.body;
+  const { username, password } = req.body;
 
   // Check that username, email, and password are provided
-  if (name === "" ||  password === "") {
+  if (username === "" || password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
         "All fields are mandatory. Please provide username, and password.",
@@ -109,17 +109,17 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     return;
   }
 
-    User.find({password})
-  .then(results => {
-    if(results.length < 6) {
-      res.render("auth/login", { mensajeError: "Credenciales incorrectas" });
-      return;
-    }
-})
-.catch(err => next(err));
+  User.find({ password })
+    .then(results => {
+      if (results.length < 6) {
+        res.render("auth/login", { mensajeError: "Credenciales incorrectas" });
+        return;
+      }
+    })
+    .catch(err => next(err));
 
   // Search the database for a user with the email submitted in the form
-  User.findOne({ name })
+  User.findOne({ username })
     .then((user) => {
       // If the user isn't found, send an error message that user provided wrong credentials
       if (!user) {
@@ -150,7 +150,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
     })
     .catch((err) => next(err));
-  });
+});
 
 // GET /auth/logout
 router.get("/logout", isLoggedIn, (req, res) => {

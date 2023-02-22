@@ -4,22 +4,71 @@
 <form action="/post/new" method="POST" enctype="multipart/form-data">
     <label for="namePlace">Title:</label>
     <input type="text" name="namePlace">
-    
+
     <label for="nameCategory">Category:</label>
     <input type="text" name="nameCategory">
 
-    <label for="direction">Direction:</label>
-    <input type="text" id="direction" name="direction">
+    <label for="auto-direction">Address:</label>
+    <input type="text" id="auto-direction" name="direction">
+
+
+    <input type="hidden" id="latitud" name="latitud">
+
+
+    <input type="hidden" id="longitud" name="longitud">
 
     <label for="comment">Comment:</label>
     <input type="text" name="comment">
 
     <label for="image">Imagen:</label>
-    <input type="file" name="image" id="image"/>
+    <input type="file" name="image" id="image" />
 
     <button type="submit">Creat new place!</button>
 
 
 </form>
 
-<a href="/">Home.</a> 
+<a href="/">Home.</a>
+
+
+
+{{!--
+<script src="/js/autocompleteForm.js"></script> --}}
+
+
+
+<script>
+    let autocomplete
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('auto-direction'),
+            {
+                types: [],
+                componentRestrictions: { 'country': ['ES'] },
+                fields: ["formatted_address", "geometry", "name"]
+            })
+
+        /*   let place = autocomplete.getPlace();
+
+           let lat = place.geometry.location.lat(),
+           let lng = place.geometry.location.lng(); */
+
+
+        autocomplete.addListener('place_changed', onPlaceChanged)
+        function onPlaceChanged() {
+            let place = autocomplete.getPlace()
+
+            if (!place.geometry) {
+                document.getElementById('auto-direction').placeholder = 'Enter a place'
+            }
+            else {
+                document.getElementById("latitud").value = place.geometry.location.lat()
+                document.getElementById("longitud").value = place.geometry.location.lng()
+            }
+        }
+    }
+</script>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCly7nIyBiSArEP0NzrfqfOBqByTCDEh4g&libraries=places&callback=initAutocomplete"> async defer
+    </script>

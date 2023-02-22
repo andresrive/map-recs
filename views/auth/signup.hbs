@@ -1,4 +1,4 @@
-  <h2>Sign Up</h2>
+  {{!-- <h2>Sign Up</h2>
   <form action="/auth/signup" method="POST" class="w-50 mx-auto">
   {{#if mensajeError}}
         <div class="alert alert-danger" role="alert">
@@ -34,4 +34,31 @@
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
     {{/if}}
-  </form>
+  </form> --}}
+
+
+<style>
+body {background-image: url("/images/fondoPantallas.avif");
+background-size: cover;}
+</style>
+
+<div class="d-flex justify-content-center ">
+<form action="/auth/signup" method="POST" class="form" >
+    {{#if mensajeError}}
+        <div class="alert alert-danger" role="alert">
+            {{mensajeError}}
+        </div>
+    {{/if}}
+    <p class="heading">Sign up</p>
+    <input class="input" placeholder="Username" type="text" name="username">
+    <input class="input" placeholder="City" type="text" name="city">
+    <input class="input" placeholder="Password" type="password" name="password"> 
+    <input class="input" placeholder="Password" type="password" name="passwordRepeat"> 
+    <button type="submit" class="btn">Sign up</button>
+    <button onclick=location.href='/auth/login' type="button" class="btn">Log in</button>
+
+     {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+    {{/if}}
+</form>
+</div>
