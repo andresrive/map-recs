@@ -1,7 +1,7 @@
 // const Post = require("../../models/Post.model")
 
-let coordenadas = document.getElementById("direction").value
-console.log(coordenadas)
+/* let coordenadas = document.getElementById("direction").value
+console.log(coordenadas) */
 
 let marker
 function initMap() {

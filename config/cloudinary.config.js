@@ -1,5 +1,5 @@
 const multer = require("multer");
-const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary").v2;
 const {CloudinaryStorage} = require("multer-storage-cloudinary");
 
 cloudinary.config({
@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
     params: {
         allowed_formats: ['jpg', 'png', 'jpeg'],
         folder: 'map-recs',
-        size: 10000000
+        //size: 10000000
     }
 })
 

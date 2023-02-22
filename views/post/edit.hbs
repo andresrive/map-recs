@@ -1,13 +1,13 @@
 <h2>Edit {{namePlace}}'s data</h2>
-<br>
-<form action="/post/{{_id}}/edit" method="POST" enctype="multipart/form-data">
-<input type="text" name="namePlace" value="{{namePlace}}">
-<input type="text" name="nameCategory" value="{{nameCategory}}">
-<input type="text" name="direction" value="{{direction}}">
-<input type="text" name="comment" value="{{comment}}">
-<input type="file" name="image" value="{{image}}">
+<br />
+<form action="/post/{{_id}}/edit/pre" method="get" enctype="multipart/form-data">
+  
+  <input type="text" name="namePlace" value="{{namePlace}}" />
+  <input type="text" name="nameCategory" value="{{nameCategory}}" />
+  <input type="text" name="direction" value="{{direction}}" />
+  <input type="text" name="comment" name="comment" value="{{comment}}" />
+  <input type="file" name="image" value="{{image}}" />
 
-<button type="submit">Edit your post!</button>
+  <button type="submit">Edit your post!</button>
 
 </form>
-

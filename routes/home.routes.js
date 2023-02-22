@@ -19,7 +19,7 @@ router.get("/list", (req, res, next) => {
         let data= {
             result
         }
-        console.log("resultado: ", data);
+       // console.log("resultado: ", data);
         res.render("home/list", data)
     })
     .catch(err => next(err))
@@ -28,6 +28,7 @@ router.get("/list", (req, res, next) => {
 router.post("/list", (req, res, next) => {
     // ESCOGER CATEGORIAS
 })
+
 
 
 module.exports = router;
