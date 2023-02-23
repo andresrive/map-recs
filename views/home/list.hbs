@@ -19,6 +19,22 @@
                         Categories
                     </a>
                     <ul class="dropdown-menu">
+                        {{#each categoryArr}}
+                        <li>
+                            <form action="/home/list" method="POST">
+                                <button class="dropdown-item" type="submit" name="nameCategory"
+                                    value="{{this}}">{{this}}</button>
+                            </form>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{!--
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Restaurant</a></li>
                         <li><a class="dropdown-item" href="#">Park</a></li>
                         <li><a class="dropdown-item" href="#">Disco</a></li>
@@ -28,7 +44,7 @@
                         <li><a class="dropdown-item" href="#">Sports</a></li>
                         <li><a class="dropdown-item" href="#">Others</a></li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
@@ -70,7 +86,7 @@
 
 <aside>
     <label for="category">Pick a category:</label><br />
-    <select name="category" id="category" multiple>
+    <select name="category" id="category">
         {{#each categoryArr}}
         <option value="{{this}}">{{this}}</option><br />
         {{/each}}

@@ -22,7 +22,7 @@ router.get("/signup", isLoggedOut, (req, res, next) => {
 
 // POST /auth/signup
 router.post("/signup", isLoggedOut, (req, res, next) => {
-  console.log(req.body)
+  //console.log(req.body)
   const { username, password, passwordRepeat, city, codigoUser } = req.body;
 
   // Check that username, password, and city are provided
