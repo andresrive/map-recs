@@ -172,4 +172,20 @@ body {
   box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
 }
 
+#card-body-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-body a, .card-body form, .card-body button {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+#img-default, #img-propia {
+  width: 200px;
+  height: 200px;
+}
+
 

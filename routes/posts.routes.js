@@ -110,7 +110,7 @@ router.post("/:id", isLoggedIn, (req, res, next) => {
         $push: { usersComments: response._id },
       });
     })
-    .then(() => res.redirect("/home/list"))
+    .then(() => res.redirect(`/post/${postId}`))
     .catch((err) => next(err));
 });
 
@@ -163,7 +163,7 @@ router.post("/:id/delete", isLoggedIn, (req, res, next) => {
   let postId = req.params.id;
   Post.findByIdAndDelete(postId)
     .then((result) => {
-      res.redirect("back");
+      res.redirect("/home/list");
     })
     .catch((err) => next(err));
 });

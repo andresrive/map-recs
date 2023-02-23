@@ -1,20 +1,42 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark-subtle">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MapRecs</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/home/map">Map</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/list">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/profile">Profile</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <h2>{{post.namePlace}}</h2>
 <div>
   <p>{{post.comment}}</p>
   <br>
- <p> Created by {{post.author.username}}</p>
+  <p> Created by {{post.author.username}}</p>
 </div>
 <div class="imagePlace">
-    <img src="{{post.image}}" alt="{{post.namePlace}}">
+  <img src="{{post.image}}" alt="{{post.namePlace}}">
 </div>
 <br>
 {{#unless post.usersComments}}
-  <p>No comments yet!</p>
+<p>No comments yet!</p>
 {{/unless}}
 
 {{#each post.usersComments}}
-  <p><b>{{this.title}}:</b> {{this.comment}}</p>
+<p><b>{{this.title}}:</b> {{this.comment}}</p>
 {{/each}}
 
 <h3>Add comment</h3>
@@ -22,7 +44,7 @@
 <form action="/post/{{post._id}}" method="post">
   <label> Current User: {{user}}</label>
   <input type="text" name="title" placeholder="Write a title..">
-  <input type="text" name="comment" placeholder="Write you comment here..."/>
+  <input type="text" name="comment" placeholder="Write you comment here..." />
 
   <button type="submit">Comment</button>
 </form>

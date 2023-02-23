@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark-subtle">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">MapRecs</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -58,9 +58,11 @@
                 <a href="../post/{{_id}}" class="link-dark">Agregar comentario</a>
                 <a href="../post/{{_id}}/edit" class="link-info"> editar</a>
             </div>
+            {{#if userRol}}
             <form action="/post/{{_id}}/delete" method="post">
                 <button type="submit" class="btn btn-danger">Delete: {{namePlace}}</button>
             </form>
+            {{/if}}
         </div>
         {{/each}}
     </div>
