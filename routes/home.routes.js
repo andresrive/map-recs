@@ -104,6 +104,9 @@ router.get("/list", isLoggedIn, (req, res, next) => {
                     if (resu.author == req.session.currentUser._id || req.session.currentUser.admin) {
                         resu.userRol = true
                     }
+                    if (resu.author == req.session.currentUser._id || req.session.currentUser.admin) {
+                        resu.userOk = true
+                    }
                     return resu
                 }),
                 categoryArr,
