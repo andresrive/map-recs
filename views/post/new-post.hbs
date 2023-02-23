@@ -1,8 +1,7 @@
 {{message}}
 
 
-<form action="/post/new" method="POST" enctype="multipart/form-data"
->
+<form action="/post/new" method="POST" enctype="multipart/form-data">
     <label for="namePlace">Title:</label>
     <input type="text" name="namePlace">
 
@@ -31,7 +30,7 @@
 
 <a href="/">Home.</a>
 
-<aside>
+{{!-- <aside>
 
 <label for="category">Pick a category:</label><br>
 <select name="category" id="category" multiple>
@@ -39,7 +38,7 @@
   <option value="{{this}}">{{this}}</option><br>
 {{/each}}
 </select>
-</aside>
+</aside> --}}
 
 
 
