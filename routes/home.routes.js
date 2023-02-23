@@ -65,14 +65,17 @@ router.get("/markers", (req, res, next) => {
 })
 
 router.get("/list", (req, res, next) => {
-    //let userId = req.session.currentUser._id
+    
     Post.find()
-        .then(result => {
-            let data = {
-                result,
-                categoryArr
-            }
-            //console.log("resultado: ", data);
+    .then(result => {
+        let data = {
+            result,
+            categoryArr,
+        }
+        if (req.session.currentUser.admin) {
+            data.userRol = req.session.currentUser.admin
+        };
+        console.log("resultado: ", data);
             res.render("home/list", data)
         })
         .catch(err => next(err))

@@ -2,9 +2,6 @@
 
 let marker
 function initMap() {
-    if (!coordenadas) {
-        return;
-    }
 
     const myLatLng = { lat: 41.38879, lng: 2.15899 }
     const map = new google.maps.Map(document.getElementById("map"), {
