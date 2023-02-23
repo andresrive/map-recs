@@ -56,14 +56,35 @@ router.post("/profile/edit", isLoggedIn, upload.single('image'), (req, res, next
 router.get("/map", isLoggedIn, (req, res, next) => {
     Post.find()
         .then(result => {
-            res.render("home/map", result)
+            let data = {
+                result,
+         /*        : result.map(resu => {
+                    if (resu.author == req.session.currentUser._id || req.session.currentUser.admin) {
+                        resu.userRol = true
+                    }
+                    return resu
+                }), */
+                categoryArr,
+            }
+            //console.log("resultado: ", data);
+            res.render("home/map", data)
         })
         .catch(err => next(err))
-
 })
 
 router.post("/map", isLoggedIn, (req, res, next) => {
     // ESCOGER CATEGORIAS
+/*     let body = JSON.parse(JSON.stringify(req.body));
+    console.log("que da:", body);
+    Post.find({nameCategory : {$all:[body.nameCategory]}})
+    .then(result => {
+        let data = {
+            result,
+            categoryArr
+        }
+        console.log("resultado", result)
+        res.render("home/map", data)
+    }) */
 })
 
 router.get("/markers", isLoggedIn, (req, res, next) => {
@@ -87,7 +108,7 @@ router.get("/list", isLoggedIn, (req, res, next) => {
                 }),
                 categoryArr,
             }
-            console.log("resultado: ", data.result);
+            //console.log("resultado: ", data.result);
             res.render("home/list", data)
         })
         .catch(err => next(err))
@@ -95,6 +116,17 @@ router.get("/list", isLoggedIn, (req, res, next) => {
 
 router.post("/list", isLoggedIn, (req, res, next) => {
     // ESCOGER CATEGORIAS
+    let body = JSON.parse(JSON.stringify(req.body));
+    console.log("que da:", body);
+    Post.find({nameCategory : {$all:[body.nameCategory]}})
+    .then(result => {
+        let data = {
+            result,
+            categoryArr
+        }
+        console.log("resultado", result)
+        res.render("home/list", data)
+    })
 })
 
 
