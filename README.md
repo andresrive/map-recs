@@ -8,7 +8,11 @@ Somos Andres, Roberto y Eugenio, somos compañeros del bootcamp y estamos desarr
 
 ## Deployment
 
+<<<<<<< HEAD
 You can play the game [here](https://map-recs.fly.dev/)
+=======
+Aqui puedes probar la app [here](https://map-recs.fly.dev/)
+>>>>>>> c4b199d07f8d73f5c6a88fcbb8b1a7670295fd27
 
 ## Estructura de trabajo
 
@@ -31,7 +35,7 @@ const User = new Schema ({
     image: String,
     info: String,
     pinPersonal: [ { type: Schema.Types.ObjectId, ref: "Post" } ],
-    pinFav: [ { type: Schema.Types.ObjectId, ref: "Comment" } ],
+    pinFav: [ { type: Schema.Types.ObjectId, ref: "Post" } ],
     admin: Boolean,
 })
 ```
@@ -43,7 +47,7 @@ const Post = new Schema ({
     direction: {type: String, required: true },
     comment: {type: String, required: true },
     usersComments: [ { type: Schema.Types.ObjectId, ref: "User" } ],
-    author: [ { type: Schema.Types.ObjectId, ref: "User" } ],
+    author: { type: Schema.Types.ObjectId, ref: "User" },
 })
 ```
 ```js
@@ -51,7 +55,7 @@ const Comment = new Schema ({
     title: {type: String, required: true },
     comment: {type: String, required: true },
     image: String,
-    author: [ { type: Schema.Types.ObjectId, ref: "User" } ],
+    author: { type: Schema.Types.ObjectId, ref: "User" },
 })
 ```
 ## Roles de usuarios
