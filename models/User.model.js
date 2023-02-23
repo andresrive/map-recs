@@ -16,7 +16,10 @@ const userSchema = new Schema ({
     // required: true
   },
   interests: String,
-  image: String,
+  image: { 
+    type: String,
+    default: "/images/perilDef.jpg"
+  },
   info: String,
   pinPersonal: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   pinFav: [{ type: Schema.Types.ObjectId, ref: "Post" }],

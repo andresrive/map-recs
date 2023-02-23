@@ -1,11 +1,9 @@
 // const Post = require("../../models/Post.model")
 
-let marker
-function initMap() {
-    if (!coordenadas) {
-        return;
-    }
+let markers = []
+let infowindows = []
 
+function initMap() {
     const myLatLng = { lat: 41.38879, lng: 2.15899 }
     const map = new google.maps.Map(document.getElementById("map"), {
         center: myLatLng,
@@ -37,24 +35,28 @@ function initMap() {
                     lat: post.latitud,
                     lng: post.longitud
                 }
-                const infowindow = new google.maps.InfoWindow({
+                console.log("POST!!!!!!!!", post)
+                infowindows.push(new google.maps.InfoWindow({
                     content: `<p style="font-weight: bolder; font-size: 1.5rem"> ${post.namePlace} </p>
                     <p style="font-style: italic; font-size: 1.2rem"> ${post.nameCategory} </p>
                     <p> ${post.direction} </p>
-                    <img style="width:350px; height:150px" src="${post.image[0]}" alt="img-${post.namePlace}">`
-                });
-                marker = new google.maps.Marker({
+                    <img style="width:350px; height:150px" src="${post.image[0]}" alt="img-${post.namePlace}">`,
+                    position: latLng
+                }));
+                markers.push(new google.maps.Marker({
                     position: latLng,
                     map: map,
-                    animation: google.maps.Animation.DROP,
-                })
-                marker.addListener("click", () => {
-                    infowindow.open(map, marker);
-                });
+                }))
 
             })
+            markers.forEach((marker, k) => {
+                marker.addListener("click", () => {
+                    infowindows[k].open(map, marker);
+                });
+            })
+
         })
-        .catch(err => next(err))
+        .catch(err => console.log(err))
 
     // Crear un infowindow para el marcador
 
@@ -66,7 +68,6 @@ function initMap() {
 
     autocomplete.addListener("place_changed", () => {
 
-        infowindow.close();
 
 
         let newMarker = new google.maps.Marker({
@@ -97,10 +98,6 @@ function initMap() {
 
         newMarker.setPosition(place.geometry.location);
         newMarker.setVisible(true);
-        infowindowContent.children["place-name"].textContent = place.name;
-        infowindowContent.children["place-address"].textContent =
-            place.formatted_address;
-        infowindow.open(map, newMarker);
     });
 
     // autocomplete.setTypes(["all"])
