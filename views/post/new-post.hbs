@@ -5,8 +5,12 @@
     <label for="namePlace">Title:</label>
     <input type="text" name="namePlace">
 
-    <label for="nameCategory">Category:</label>
-    <input type="text" name="nameCategory">
+    <label for="category">Category:</label>
+    <select name="nameCategory" id="category">
+        {{#each data}}
+        <option value="{{this}}">{{this}}</option><br>
+        {{/each}}
+    </select>
 
     <label for="auto-direction">Address:</label>
     <input type="text" id="auto-direction" name="direction">
@@ -21,7 +25,7 @@
     <input type="text" name="comment">
 
     <label for="image">Imagen:</label>
-    <input type="file" name="image" id="image"/>
+    <input type="file" name="image" id="image" />
 
     <button>Creat new place!</button>
 
@@ -30,7 +34,7 @@
 
 <a href="/">Home.</a>
 
-{{!-- <aside>
+<aside>
 
 <label for="category">Pick a category:</label><br>
 <select name="category" id="category" multiple>
@@ -38,7 +42,7 @@
   <option value="{{this}}">{{this}}</option><br>
 {{/each}}
 </select>
-</aside> --}}
+</aside>
 
 
 
