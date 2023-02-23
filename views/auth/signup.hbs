@@ -42,7 +42,7 @@
     }
 </style>
 
-<div class="d-flex justify-content-center ">
+<div class="d-flex justify-content-center marginForForms">
     <form action="/auth/signup" method="POST" class="form">
         {{#if mensajeError}}
         <div class="alert alert-danger" role="alert">
@@ -55,7 +55,7 @@
         <input class="input" placeholder="Password" type="password" name="password">
         <input class="input" placeholder="Password" type="password" name="passwordRepeat">
         <input type="text" placeholder="Ingrese su codigo." name="codigoUser" class="input">
-    <button type="submit" class="bttn">Sign up</button>
+        <button type="submit" class="bttn">Sign up</button>
         <button onclick=location.href='/auth/login' type="button" class="bttn">Log in</button>
 
         {{#if errorMessage}}

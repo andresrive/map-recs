@@ -21,7 +21,7 @@
 <div class="container text-center">
   <div class="row">
     <div class="col align-self-center">
-      <h1>{{user.username}}'s Profile</h1>
+      <h1>{{user.username}}'s profile</h1>
       <div class="profile">
         {{!-- <img id="img-default" src="/images/perilDef.jpg" class="img-thumbnail" alt="imgPerfil">
         {{#if user.image}} --}}
@@ -48,8 +48,8 @@
     <h2>My Pins</h2>
     {{#each user.pinPersonal}}
     <div class="col col-sm-6 col-lg-4 col-xl-3">
-      <div class="card" style="width: 13.75rem;">
-        <img src="{{image}}" alt="{{image}}" class="img-thumbnail" width="220" height="220">
+      <div class="card" style="width: 13.75rem; height: 40rem; margin: 3rem auto">
+        <img id="pinspics" src="{{image}}" alt="{{image}}" class="img-thumbnail" width="220" height="220">
         <div class="card-body">
           <h3 class="card-title">{{namePlace}}</h3>
           <p class="card-text">Category: {{nameCategory}}</p>
@@ -58,7 +58,7 @@
           <p class="comments">Comentarios: {{usersComments.length}}</p>
         </div>
         <div id="card-body-btn" class="card-body">
-          <a href="../post/{{_id}}"><button class="bttn">Add a comment</button></a>
+          <a href="../post/{{_id}}"><button class="bttn">Open post</button></a>
           <a href="../post/{{_id}}/edit"><button class="bttn">Edit post</button></a>
           <form action="/post/{{_id}}/delete" method="post">
             <button type="submit" class="bttn bg-danger text-white">Delete post</button>
