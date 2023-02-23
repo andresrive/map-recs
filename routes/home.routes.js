@@ -5,7 +5,10 @@ const User = require("../models/User.model");
 const Post = require("../models/Post.model");
 const Comment = require("../models/Comment.model");
 
-router.get("/map", (req, res, next) => {
+const isLoggedOut = require("../middleware/isLoggedOut");
+const isLoggedIn = require("../middleware/isLoggedIn");
+
+router.get("/map", isLoggedIn, (req, res, next) => {
     Post.find()
         .then(result => {
             res.render("home/map", result)
@@ -14,11 +17,11 @@ router.get("/map", (req, res, next) => {
 
 })
 
-router.post("/map", (req, res, next) => {
+router.post("/map", isLoggedIn, (req, res, next) => {
     // ESCOGER CATEGORIAS
 })
 
-router.get("/markers", (req, res, next) => {
+router.get("/markers", isLoggedIn, (req, res, next) => {
     Post.find()
         .then(result => {
             res.json(result);
@@ -26,7 +29,7 @@ router.get("/markers", (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.get("/list", (req, res, next) => {
+router.get("/list", isLoggedIn, (req, res, next) => {
     Post.find()
         .then(result => {
             let data = {
@@ -38,7 +41,7 @@ router.get("/list", (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.post("/list", (req, res, next) => {
+router.post("/list", isLoggedIn, (req, res, next) => {
     // ESCOGER CATEGORIAS
 })
 

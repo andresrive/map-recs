@@ -8,11 +8,14 @@ const User = require("../models/User.model");
 const Post = require("../models/Post.model");
 const Comment = require("../models/Comment.model");
 
-router.get("/new", (req, res, next) => {
+const isLoggedOut = require("../middleware/isLoggedOut");
+const isLoggedIn = require("../middleware/isLoggedIn");
+
+router.get("/new", isLoggedIn, (req, res, next) => {
   res.render("post/new-post");
 });
 
-router.post("/new", upload.single("image"), (req, res, next) => {
+router.post("/new", isLoggedIn, upload.single("image"), (req, res, next) => {
   let author = req.session.currentUser._id;
   let { namePlace, nameCategory, direction, latitud, longitud, comment } = req.body;
   if (namePlace == "" || nameCategory == "" || direction == "" || comment == "") {
@@ -57,7 +60,7 @@ router.post("/new", upload.single("image"), (req, res, next) => {
   //}
 });
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id", isLoggedIn, (req, res, next) => {
   let user = req.session.currentUser.username;
   const postId = req.params.id;
   Post.findById(postId)
@@ -80,7 +83,7 @@ router.get("/:id", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post("/:id", (req, res, next) => {
+router.post("/:id", isLoggedIn, (req, res, next) => {
   //console.log("params:", req.params)
   let postId = req.params.id
   let { title, comment } = req.body
@@ -93,7 +96,7 @@ router.post("/:id", (req, res, next) => {
     .catch(err => next(err));
 })
 
-router.get("/:id/edit", (req, res, next) => {
+router.get("/:id/edit", isLoggedIn, (req, res, next) => {
   //console.log("a ver que es esto", req.params.id)
   const postId = req.params.id;
   Post.findById(postId)
@@ -104,7 +107,7 @@ router.get("/:id/edit", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post("/:id/edit", (req, res, next) => {
+router.post("/:id/edit", isLoggedIn, (req, res, next) => {
   let { namePlace, nameCategory, direction, comment } = req.body;
   let postId = req.params.id;
 
@@ -128,7 +131,7 @@ router.post("/:id/edit", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.get("/:id/post", (req, res, next) => {
+router.get("/:id/post", isLoggedIn, (req, res, next) => {
   const postId = req.params.id;
   User.findById(postId)
     .populate('pinPersonal')
@@ -139,7 +142,7 @@ router.get("/:id/post", (req, res, next) => {
     .catch(err => next(err));
 })
 
-router.post("/:id/delete", (req, res, next) => {
+router.post("/:id/delete", isLoggedIn, (req, res, next) => {
   let postId = req.params.id;
   Post.findByIdAndDelete(postId)
     .then(result => {
