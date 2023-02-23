@@ -28,21 +28,9 @@ router.get("/profile", (req, res, next)=> {
 
 
 router.get("/map", (req, res, next) => {
-    let latlng = {
-        latitud,
-        longitud
-    }
     Post.find()
         .then(result => {
-            let coordenadasArr = [];
-            result.forEach((post) => {
-                coordenadasArr.push({
-                    latitud: post.latitud,
-                    longitud: post.longitud
-                })
-            })
-            console.log(coordenadasArr);
-            res.render("home/map")
+            res.render("home/map", result)
         })
         .catch(err => next(err))
 
@@ -50,6 +38,14 @@ router.get("/map", (req, res, next) => {
 
 router.post("/map", (req, res, next) => {
     // ESCOGER CATEGORIAS
+})
+
+router.get("/markers", (req, res, next) => {
+    Post.find()
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => next(err))
 })
 
 router.get("/list", (req, res, next) => {

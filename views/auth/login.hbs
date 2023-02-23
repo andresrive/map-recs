@@ -2,43 +2,44 @@
   <h2>Log In</h2>
 
   <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
-        <label for="floatingInput">Name</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-        <label for="floatingPassword">Password</label>
-    </div>
+    <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+    <label for="floatingInput">Name</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+    <label for="floatingPassword">Password</label>
+  </div>
 
 
-    <button type="submit" class="btn btn-primary">Log in</button>
-    
-    <button onclick= location.href='/auth/signup' type="button" class="btn btn-primary">
-         Sign up</button>
+  <button type="submit" class="btn btn-primary">Log in</button>
 
-    {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-    {{/if}}
-  </form> --}}
+  <button onclick=location.href='/auth/signup' type="button" class="btn btn-primary">
+    Sign up</button>
+
+  {{#if errorMessage}}
+  <p class="error">{{errorMessage}}</p>
+  {{/if}}
+</form> --}}
 
 
 
 <style>
-body {background-image: url("/images/fondoPantallas.avif");
-background-size: cover;}
+  body {
+    background-image: url("/images/fondoPantallas.avif");
+    background-size: cover;
+  }
 </style>
 
 <div class="d-flex justify-content-center ">
-<form action="/auth/login" method="POST" class="form" >
+  <form action="/auth/login" method="POST" class="form">
     <p class="heading">Login</p>
     <input class="input" placeholder="Username" type="text" name="username">
-    <input class="input" placeholder="Password" type="password" name="password"> 
-    <button type="submit" class="btn">Log in</button>
-    <button onclick=location.href='/auth/signup' type="button" class="btn">Sign up</button>
+    <input class="input" placeholder="Password" type="password" name="password">
+    <button type="submit" class="bttn">Log in</button>
+    <button onclick=location.href='/auth/signup' type="button" class="bttn">Sign up</button>
 
-     {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
     {{/if}}
-</form>
+  </form>
 </div>
-
