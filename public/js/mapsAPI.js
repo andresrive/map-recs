@@ -105,7 +105,6 @@ function initMap() {
 
     // autocomplete.setTypes(["all"])
 
-
 }
 
 window.initMap = initMap;

@@ -16,7 +16,7 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 // GET /auth/signup
-router.get("/signup", isLoggedOut, (req, res) => {
+router.get("/signup", isLoggedOut, (req, res, next) => {
   res.render("auth/signup");
 });
 
@@ -69,11 +69,11 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
       // Create a user and save it in the database
-      return User.create({ username, password: hashedPassword, city });
+      return User.create({ username: username, password: hashedPassword, city });
     })
     .then((user) => {
       console.log("usuario creado: ", user)
-      res.redirect("/auth/login");
+      res.redirect("/home/profile");
     })
     .catch((error) => {
       console.log(error)
@@ -108,15 +108,9 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     });
   }
 
-  User.find({ password })
-    .then(results => {
-      if (results.length < 6) {
-        res.render("auth/login", { mensajeError: "Credenciales incorrectas" });
-        return;
-      }
-    })
-    .catch(err => next(err));
-
+  if (password.length < 6) {
+    res.render("auth/login", { errorMessage: "Credenciales incorrectas" });
+  }
   // Search the database for a user with the email submitted in the form
   User.findOne({ username })
     .then((user) => {
@@ -147,10 +141,10 @@ router.post("/login", isLoggedOut, (req, res, next) => {
       req.session.currentUser = userData;
       // Remove the password field
       delete req.session.currentUser.password;
-          res.redirect("/home/profile");
-        })
-        .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
-   
+
+      res.redirect("/home/profile");
+    })
+    .catch((err) => next(err));
 });
 
 // GET /auth/logout
