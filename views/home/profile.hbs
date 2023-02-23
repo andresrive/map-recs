@@ -1,32 +1,11 @@
 <h1>{{user.username}}'s Profile</h1>
 <br>
 <div class="profile">
-<<<<<<< HEAD
 <h2>City:</h2>
 <p>{{user.city}}</p>
-=======
-<<<<<<< HEAD
-  {{!-- <img src="{{profilePictureUrl}}" alt="{{username}}" class="profile-picture" /> --}}
-  <h2>{{username}}</p>
-  <p>{{city}}</p>
-</div>
-<label for="interests">My interests</label>
-<input type="text" id="interests" name="interests" />
-<h2>My Pins</h2>
-{{#each pinPersonal}}
-<p>{{pinPersonal}}</p>
-{{/each}}
-<h2>My Favorites</h2>
-{{#each pinFav}}
-<p>{{pinFav}}</p>
-{{/each}}
 
-<button onclick="location.href='/post/postUser'" type="button" class="btn btn-primary">
-  Create post</button>
-=======
   <h2>{{user.username}}</p>
   <p>{{user.city}}</p>
->>>>>>> dev
 </div>
 <h2>My interests</h2>
 <p>{{user.interests}}</p>
@@ -53,9 +32,9 @@
 
 <button onclick="location.href='/post/new'" type="button" class="btn btn-primary">
   Make a post</button>
-
+<button onclick="location.href='/'" type="button" class="btn btn-primary">
+  Home</button>
 <a href="/home/profile/edit" class="btn btn-primary">Edit</a>
 
 
   
->>>>>>> roberto
