@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Post = require("../models/Post.model");
 const Comment = require("../models/Comment.model");
+const upload = require("../config/cloudinary.config");
 
 const categoryArr =  ["Restaurant", "Park", "Disco", "Beach", "Pharmacy", "Night Life", "Sports", "Others"]
 
@@ -13,7 +14,7 @@ router.get("/profile", (req, res, next)=> {
     .populate("pinFav")
     .populate("interests")
     .then((user)=>{
-        console.log('PIN PERSONAL:', user.pinPersonal)
+        console.log('PIN PERSONAL:', user)
         res.render("home/profile", {user})
     })
    .catch(err => next(err));
@@ -30,10 +31,11 @@ router.get("/profile/edit", (req, res, next) => {
    .catch(err => next(err));
 });
 
-router.post("/profile/edit", (req,res, next)=>{
+router.post("/profile/edit",upload.single('image'), (req,res, next)=>{
     const { city, interests } = req.body;
-
-    User.findByIdAndUpdate(req.session.currentUser._id, {city, interests}, {new: true})
+    const image = req.file.path
+    console.log(image)
+    User.findByIdAndUpdate(req.session.currentUser._id, {city, interests, image}, {new: true})
     .then((user) => {
         res.render("home/profile", {user})
     })
@@ -69,13 +71,15 @@ router.get("/list", (req, res, next) => {
     Post.find()
     .then(result => {
         let data = {
-            result,
+            result: result.map(resu => {
+                if (resu.author == req.session.currentUser._id || req.session.currentUser.admin) {
+                    resu.userRol = true
+                }
+                return resu
+            }),
             categoryArr,
         }
-        if (req.session.currentUser.admin) {
-            data.userRol = req.session.currentUser.admin
-        };
-        console.log("resultado: ", data);
+        console.log("resultado: ", data.result);
             res.render("home/list", data)
         })
         .catch(err => next(err))
