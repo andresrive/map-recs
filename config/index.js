@@ -26,8 +26,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
 // Connects the mongo uri to maintain the same naming structure
-const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/map-recs";
+const MONGO_URI = "mongodb://0.0.0.0:27017/map-recs";
 
 // Middleware configuration
 module.exports = (app) => {
@@ -36,7 +35,10 @@ module.exports = (app) => {
 
   // To have access to `body` property in the request
   app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
+  app.use(express.urlencoded({ extended: false })); 
+/*   const bodyParser = require("body-parser")
+  app.use(bodyParser.urlencoded());
+  app.use(bodyParser.json()); */
   app.use(cookieParser());
 
   // Normalizes the path to the views folder

@@ -16,12 +16,12 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 // GET /auth/signup
-router.get("/signup", isLoggedOut, (req, res) => {
+router.get("/signup", isLoggedOut, (req, res, next) => {
   res.render("auth/signup");
 });
 
 // POST /auth/signup
-router.post("/signup", isLoggedOut, (req, res) => {
+router.post("/signup", isLoggedOut, (req, res, next) => {
   console.log(req.body)
   const { username, password, passwordRepeat, city } = req.body;
 
@@ -69,11 +69,11 @@ router.post("/signup", isLoggedOut, (req, res) => {
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
       // Create a user and save it in the database
-      return User.create({ username, password: hashedPassword, city });
+      return User.create({ username: username, password: hashedPassword, city });
     })
     .then((user) => {
       console.log("usuario creado: ", user)
-      res.redirect("/auth/login");
+      res.redirect("/home/profile");
     })
     .catch((error) => {
       console.log(error)
@@ -91,33 +91,26 @@ router.post("/signup", isLoggedOut, (req, res) => {
 });
 
 // GET /auth/login
-router.get("/login", isLoggedOut, (req, res) => {
+router.get("/login", isLoggedOut, (req, res, next) => {
   res.render("auth/login");
 });
 
 // POST /auth/login
 router.post("/login", isLoggedOut, (req, res, next) => {
   const { username, password } = req.body;
+  let userData = null;
 
   // Check that username, email, and password are provided
-  if (username === "" || password === "") {
+  if (username === "" ||  password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
         "All fields are mandatory. Please provide username, and password.",
     });
-
-    return;
   }
 
-  User.find({ password })
-    .then(results => {
-      if (results.length < 6) {
-        res.render("auth/login", { mensajeError: "Credenciales incorrectas" });
-        return;
-      }
-    })
-    .catch(err => next(err));
-
+  if (password.length < 6) {
+    res.render("auth/login", { errorMessage: "Credenciales incorrectas" });
+  }
   // Search the database for a user with the email submitted in the form
   User.findOne({ username })
     .then((user) => {
@@ -126,28 +119,30 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         res
           .status(400)
           .render("auth/login", { errorMessage: "Wrong credentials." });
+
+          return;
+      }
+
+      userData = user;
+
+      // If user is found based on the username, check if the in putted password matches the one saved in the database
+      return bcrypt.compare(password, user.password);
+    })
+    .then((isSamePassword) => {
+      if (!isSamePassword) {
+        res
+          .status(400)
+          .render("auth/login", { errorMessage: "Wrong credentials." });
+
         return;
       }
 
-      // If user is found based on the username, check if the in putted password matches the one saved in the database
-      bcrypt
-        .compare(password, user.password)
-        .then((isSamePassword) => {
-          if (!isSamePassword) {
-            res
-              .status(400)
-              .render("auth/login", { errorMessage: "Wrong credentials." });
-            return;
-          }
+      // Add the user object to the session object
+      req.session.currentUser = userData;
+      // Remove the password field
+      delete req.session.currentUser.password;
 
-          // Add the user object to the session object
-          req.session.currentUser = user.toObject();
-          // Remove the password field
-          delete req.session.currentUser.password;
-
-          res.redirect("/post/profile");
-        })
-        .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
+      res.redirect("/home/profile");
     })
     .catch((err) => next(err));
 });

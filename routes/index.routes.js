@@ -6,36 +6,36 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
-router.get("/signup", (req, res, next) => {
-  res.render("auth/signup")
-})
+// router.get("/signup", (req, res, next) => {
+//   res.render("auth/signup")
+// })
 
-router.post("/signup", (req, res, next) => {
+// router.post("/signup", (req, res, next) => {
 
-})
+// })
 
-router.get("/login", (req, res, next) => {
-  res.render("auth/login")
-})
+// router.get("/login", (req, res, next) => {
+//   res.render("auth/login")
+// })
 
-router.post("/login", (req, res, next) => {
-  let {username, password} = req.body;
+// router.post("/login", (req, res, next) => {
+//   let {username, password} = req.body;
 
-  if(username == "" || password == "") {
-    res.render("auth/login", { mensajeError: "Faltan campos" });
-    return;
-  } 
+//   if(username == "" || password == "") {
+//     res.render("auth/login", { mensajeError: "Faltan campos" });
+//     return;
+//   } 
 
-})
+// })
 
 
-router.get("/profile/:id", (req, res, next) => {
-  res.render("profile")
-})
+// router.get("/profile/:id", (req, res, next) => {
+//   res.render("profile")
+// })
 
-router.post("/profile/:id", (req, res, next) => {
+// router.post("/profile/:id", (req, res, next) => {
 
-})
+// })
 
 
 module.exports = router;

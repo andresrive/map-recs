@@ -1,7 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const postSchema = new Schema({
-    image: [String],
+    image: [{
+        type: String,
+        require: true
+    }],
     namePlace: {
         type: String,
         required: true

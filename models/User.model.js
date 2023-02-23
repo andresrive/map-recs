@@ -15,6 +15,7 @@ const userSchema = new Schema ({
     type: String,
     // required: true
   },
+  interests: String,
   image: String,
   info: String,
   pinPersonal: [{ type: Schema.Types.ObjectId, ref: "Post" }],

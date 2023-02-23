@@ -13,8 +13,8 @@ const storage = new CloudinaryStorage({
     params: {
         allowed_formats: ['jpg', 'png', 'jpeg'],
         folder: 'map-recs',
-        // size: 10000000
+        //size: 10000000
     }
 })
 
-module.exports = multer({ storage })
+module.exports = (multer({storage}));
