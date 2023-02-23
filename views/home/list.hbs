@@ -1,45 +1,76 @@
-{{!-- <main class="container text-center"> --}}
-    {{#if message}}
-    <p>{{message}}</p>
-    {{/if}}
-    <div class="container">
-        <div class="row">
-            {{#each result}}
-            <div class="col col-sm-6 col-md-4">
-                <div>
-                    <div class="card" style="width: 13.75rem;">
-                        <img src="{{image}}" alt="{{image}}" class="img-thumbnail" width="220" height="220">
-                        <div class="card-body">
-                            <h3 class="card-title">{{namePlace}}</h3>
-                            <p class="card-text">{{nameCategory}}</p>
-                            <p class="card-text">{{direction}}</p>
-                            <p class="card-text">{{comment}}</p>
-                            <p class="comments" class="card-text">Comentarios: {{usersComments.length}}</p>
-                        </div>
-                        <div class="card-body">
-                            <a href="../post/{{_id}}" class="link-dark">Agregar comentario</a>
-                            <a href="../post/{{_id}}/edit" class="link-info"> editar</a>
-                        </div>
-                    </div>
-                </div>
-                {{#if userRol}}
-                <form action="/post/{{_id}}/delete" method="post">
-                    <button type="submit" class="btn btn-danger">Delete: {{namePlace}}</button>
-                </form>
-                {{/if}}
-            </div>
-            {{/each}}
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MapRecs</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/map">Map</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/profile">Profile</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Restaurant</a></li>
+                        <li><a class="dropdown-item" href="#">Park</a></li>
+                        <li><a class="dropdown-item" href="#">Disco</a></li>
+                        <li><a class="dropdown-item" href="#">Beach</a></li>
+                        <li><a class="dropdown-item" href="#">Night Life</a></li>
+                        <li><a class="dropdown-item" href="#">Pharmacy</a></li>
+                        <li><a class="dropdown-item" href="#">Sports</a></li>
+                        <li><a class="dropdown-item" href="#">Others</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
+</nav>
 
-    <aside>
-        <label for="category">Pick a category:</label><br />
-        <select name="category" id="category" multiple>
-            {{#each categoryArr}}
-            <option value="{{this}}">{{this}}</option><br />
-            {{/each}}
-        </select>
-    </aside>
+{{#if message}}
+<p>{{message}}</p>
+{{/if}}
 
-    {{!--
-</main> --}}
+
+
+<div class="container">
+    <div class="row">
+        {{#each result}}
+        <div class="col col-sm-6 col-md-4">
+            <div>
+                <div class="card" style="width: 13.75rem;"></div>
+                <img src="{{image}}" alt="{{image}}" class="img-circle" width="220" height="220">
+                <div class="card-body"></div>
+                <h3 class="card-title">{{namePlace}}</h3>
+                <p class="card-text">{{nameCategory}}</p>
+                <p class="card-text">{{direction}}</p>
+                <p class="card-text">{{comment}}</p>
+                <p class="comments" class="card-text">Comentarios: {{usersComments.length}}</p>
+            </div>
+            <div class="card-body">
+                <a href="../post/{{_id}}" class="link-dark">Agregar comentario</a>
+                <a href="../post/{{_id}}/edit" class="link-info"> editar</a>
+            </div>
+            <form action="/post/{{_id}}/delete" method="post">
+                <button type="submit" class="btn btn-danger">Delete: {{namePlace}}</button>
+            </form>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<aside>
+    <label for="category">Pick a category:</label><br />
+    <select name="category" id="category" multiple>
+        {{#each categoryArr}}
+        <option value="{{this}}">{{this}}</option><br />
+        {{/each}}
+    </select>
+</aside>

@@ -7,15 +7,13 @@ const User = require("../models/User.model");
 const Post = require("../models/Post.model");
 const Comment = require("../models/Comment.model");
 const isLoggedIn = require("../middleware/isLoggedIn");
-const isLoffedOut = require("../middleware/isLoggedOut");
-const categoryArr =  ["Restaurant", "Park", "Disco", "Beach", "Pharmacy", "Night Life", "Sports", "Others"]
+const isLoggedOut = require("../middleware/isLoggedOut");
+const categoryArr = ["Restaurant", "Park", "Disco", "Beach", "Pharmacy", "Night Life", "Sports", "Others"]
 
-router.get("/new", (req, res, next) => {
-  let data = {
-      categoryArr
-  }
-  console.log(data)
-  res.render("post/new-post", data);
+
+
+router.get("/new", isLoggedIn, (req, res, next) => {
+  res.render("post/new-post", { data: categoryArr });
 });
 
 router.post("/new", upload.single('image'), (req, res, next) => {
@@ -55,7 +53,7 @@ router.post("/new", upload.single('image'), (req, res, next) => {
       .catch((err) => next(err));
   } else {
     res.render("post/new-post", {
-      message: "FAlta algun campo por completar!"
+      message: "Falta subir una imagen"
     })
   }
 

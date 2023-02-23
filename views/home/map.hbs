@@ -1,37 +1,47 @@
-{{!-- <div class="pac-card" id="pac-card">
-  <div id="type-selector" class="pac-controls">
-    <input type="radio" name="type" id="changetype-all" checked="checked" />
-    <label for="changetype-all">All</label>
-
-    <input type="radio" name="type" id="changetype-establishment" />
-    <label for="changetype-establishment">establishment</label>
-
-    <input type="radio" name="type" id="changetype-address" />
-    <label for="changetype-address">Address</label>
-
-    <input type="radio" name="type" id="changetype-geocode" />
-    <label for="changetype-geocode">geocode</label>
-
-    <input type="radio" name="type" id="changetype-cities" />
-    <label for="changetype-cities">(cities)</label>
-
-    <input type="radio" name="type" id="changetype-regions" />
-    <label for="changetype-regions">(regions)</label>
-  </div> --}}
-
-
-
-  <div id="pac-container">
-    <input id="pac-input" type="text" placeholder="Search..." />
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MapRecs</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/home/list">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/profile">Profile</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Restaurant</a></li>
+            <li><a class="dropdown-item" href="#">Park</a></li>
+            <li><a class="dropdown-item" href="#">Disco</a></li>
+            <li><a class="dropdown-item" href="#">Beach</a></li>
+            <li><a class="dropdown-item" href="#">Night Life</a></li>
+            <li><a class="dropdown-item" href="#">Pharmacy</a></li>
+            <li><a class="dropdown-item" href="#">Sports</a></li>
+            <li><a class="dropdown-item" href="#">Others</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div id="pac-container">
+        <input class="form-control me-2" id="pac-input" type="text" placeholder="Search..." />
+      </div>
+    </div>
   </div>
+</nav>
+
+<div id="map" class="container-fluid"></div>
 
 
-  <div id="map" class="container-fluid"></div>
 
 
-
-
-  <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCly7nIyBiSArEP0NzrfqfOBqByTCDEh4g&libraries=places&callback=initMap">
-    </script>
-  <script type="text/javascript" src="/js/mapsAPI.js"></script>
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCly7nIyBiSArEP0NzrfqfOBqByTCDEh4g&libraries=places&callback=initMap">
+  </script>
+<script type="text/javascript" src="/js/mapsAPI.js"></script>
