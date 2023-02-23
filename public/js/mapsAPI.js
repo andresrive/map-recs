@@ -37,7 +37,7 @@ function initMap() {
                     content: `<p style="font-weight: bolder; font-size: 1.5rem"> ${post.namePlace} </p>
                     <p style="font-style: italic; font-size: 1.2rem"> ${post.nameCategory} </p>
                     <p> ${post.direction} </p>
-                    <img style="width:350px; height:auto" src="${post.image[0]}" alt="img-${post.namePlace}">`
+                    <img style="width:350px; height:150px" src="${post.image[0]}" alt="img-${post.namePlace}">`
                 });
                 marker = new google.maps.Marker({
                     position: latLng,
