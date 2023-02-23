@@ -8,11 +8,7 @@ Somos Andres, Roberto y Eugenio, somos compañeros del bootcamp y estamos desarr
 
 ## Deployment
 
-<<<<<<< HEAD
-You can play the game [here](https://map-recs.fly.dev/)
-=======
 Aqui puedes probar la app [here](https://map-recs.fly.dev/)
->>>>>>> c4b199d07f8d73f5c6a88fcbb8b1a7670295fd27
 
 ## Estructura de trabajo
 
