@@ -60,7 +60,7 @@ router.get("/list", (req, res, next) => {
                 result,
                 categoryArr
             }
-            console.log("resultado: ", data);
+            //console.log("resultado: ", data);
             res.render("home/list", data)
         })
         .catch(err => next(err))
