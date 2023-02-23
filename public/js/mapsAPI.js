@@ -1,6 +1,5 @@
 // const Post = require("../../models/Post.model")
 
-
 let marker
 function initMap() {
 
@@ -25,51 +24,55 @@ function initMap() {
     const autocomplete = new google.maps.places.Autocomplete(input, options);
 
 
+
     autocomplete.bindTo("bounds", map);
 
-    // const infowindow = new google.maps.InfoWindow();
-    // const infowindowContent = document.getElementById("infowindow-content");
+    axios.get("http://localhost:3000/home/markers")
+        .then(response => {
+            response.data.forEach(post => {
+                let latLng = {
+                    lat: post.latitud,
+                    lng: post.longitud
+                }
+                const infowindow = new google.maps.InfoWindow({
+                    content: `<p style="font-weight: bolder; font-size: 1.5rem"> ${post.namePlace} </p>
+                    <p style="font-style: italic; font-size: 1.2rem"> ${post.nameCategory} </p>
+                    <p> ${post.direction} </p>
+                    <img style="width:350px; height:150px" src="${post.image[0]}" alt="img-${post.namePlace}">`
+                });
+                marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                })
+                marker.addListener("click", () => {
+                    infowindow.open(map, marker);
+                });
 
-    // infowindow.setContent(infowindowContent);
+            })
+        })
+        .catch(err => next(err))
+
+    // Crear un infowindow para el marcador
 
 
+    // Agregar un listener para el evento 'click' en el marcador
+    // Abrir el infowindow para mostrar la información del marcador
 
-
-    const features = [
-        {
-            position: new google.maps.LatLng(41.39550664355469, 2.1620292786643365),
-            type: "info",
-        },
-        {
-            position: new google.maps.LatLng(41.38428068389497, 2.176468720113538),
-            type: "info",
-        },
-        {
-            position: new google.maps.LatLng(41.39117708987904, 2.180684436927278),
-            type: "info",
-        }]
-
-    for (let i = 0; i < features.length; i++) {
-        marker = new google.maps.Marker({
-            position: features[i].position,
-            map: map,
-            animation: google.maps.Animation.DROP,
-        });
-    }
-
-    // const marker = new google.maps.Marker({
-    //     draggable: true,
-    //     animation: google.maps.Animation.DROP,
-    //     map,
-    //     anchorPoint: new google.maps.Point(0, -29),
-    // });
-    marker.addListener("click", toggleBounce);
 
 
     autocomplete.addListener("place_changed", () => {
 
-        // infowindow.close();
-        marker.setVisible(false);
+        infowindow.close();
+
+
+        let newMarker = new google.maps.Marker({
+            position: undefined,
+            map: map,
+            animation: google.maps.Animation.DROP,
+        })
+
+        newMarker.setVisible(false);
 
         const place = autocomplete.getPlace();
         console.log(place)
@@ -89,25 +92,15 @@ function initMap() {
             map.setZoom(17);
         }
 
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
-        // infowindowContent.children["place-name"].textContent = place.name;
-        // infowindowContent.children["place-address"].textContent =
-        //     place.formatted_address;
-        // infowindow.open(map, marker);
+        newMarker.setPosition(place.geometry.location);
+        newMarker.setVisible(true);
+        infowindowContent.children["place-name"].textContent = place.name;
+        infowindowContent.children["place-address"].textContent =
+            place.formatted_address;
+        infowindow.open(map, newMarker);
     });
 
     // autocomplete.setTypes(["all"])
-
-
-
-    function toggleBounce() {
-        if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
-        } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-    }
 
 }
 
