@@ -1,11 +1,11 @@
-  {{!-- <h2>Sign Up</h2>
-  <form action="/auth/signup" method="POST" class="w-50 mx-auto">
-  {{#if mensajeError}}
-        <div class="alert alert-danger" role="alert">
-            {{mensajeError}}
-        </div>
+{{!-- <h2>Sign Up</h2>
+<form action="/auth/signup" method="POST" class="w-50 mx-auto">
+    {{#if mensajeError}}
+    <div class="alert alert-danger" role="alert">
+        {{mensajeError}}
+    </div>
     {{/if}}
-   <div class="form-floating mb-3">
+    <div class="form-floating mb-3">
         <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
         <label for="floatingInput">Name</label>
     </div>
@@ -23,41 +23,43 @@
         <label for="floatingPassword">Repeat password</label>
     </div>
 
- <button type="submit" class="btn btn-primary">Sign up</button>
+    <button type="submit" class="btn btn-primary">Sign up</button>
 
-<button onclick="location.href='/auth/login'" type="button" class="btn btn-primary">
-         I already signed up. I need to log in</button>
+    <button onclick="location.href='/auth/login'" type="button" class="btn btn-primary">
+        I already signed up. I need to log in</button>
 
 
     {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
+    <p class="error">{{errorMessage}}</p>
     {{/if}}
-  </form> --}}
+</form> --}}
 
 
 <style>
-body {background-image: url("/images/fondoPantallas.avif");
-background-size: cover;}
+    body {
+        background-image: url("/images/fondoPantallas.avif");
+        background-size: cover;
+    }
 </style>
 
 <div class="d-flex justify-content-center ">
-<form action="/auth/signup" method="POST" class="form" >
-    {{#if mensajeError}}
+    <form action="/auth/signup" method="POST" class="form">
+        {{#if mensajeError}}
         <div class="alert alert-danger" role="alert">
             {{mensajeError}}
         </div>
-    {{/if}}
-    <p class="heading">Sign up</p>
-    <input class="input" placeholder="Username" type="text" name="username">
-    <input class="input" placeholder="City" type="text" name="city">
-    <input class="input" placeholder="Password" type="password" name="password"> 
-    <input class="input" placeholder="Password" type="password" name="passwordRepeat"> 
-    <input type="text" placeholder="Ingrese su codigo." name="codigoUser" class="imput">
-    <button type="submit" class="btn">Sign up</button>
-    <button onclick=location.href='/auth/login' type="button" class="btn">Log in</button>
+        {{/if}}
+        <p class="heading">Sign up</p>
+        <input class="input" placeholder="Username" type="text" name="username">
+        <input class="input" placeholder="City" type="text" name="city">
+        <input class="input" placeholder="Password" type="password" name="password">
+        <input class="input" placeholder="Password" type="password" name="passwordRepeat">
+        <input type="text" placeholder="Ingrese su codigo." name="codigoUser" class="imput">
+    <button type="submit" class="bttn">Sign up</button>
+        <button onclick=location.href='/auth/login' type="button" class="bttn">Log in</button>
 
-     {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-    {{/if}}
-</form>
+        {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+        {{/if}}
+    </form>
 </div>

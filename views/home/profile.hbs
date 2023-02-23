@@ -1,5 +1,6 @@
 <h1>Profile</h1>
 <div class="profile">
+<<<<<<< HEAD
   {{!-- <img src="{{profilePictureUrl}}" alt="{{username}}" class="profile-picture" /> --}}
   <h2>{{username}}</p>
   <p>{{city}}</p>
@@ -17,3 +18,38 @@
 
 <button onclick="location.href='/post/postUser'" type="button" class="btn btn-primary">
   Create post</button>
+=======
+  <h2>{{user.username}}</p>
+  <p>{{user.city}}</p>
+</div>
+<h2>My interests</h2>
+<p>{{user.interests}}</p>
+<h2>My Pins</h2>
+{{#each user.pinPersonal}}
+<h2>{{namePlace}}</h2>
+<div>
+    <p>Category: {{nameCategory}}</p>
+    <p>Direction: {{direction}}</p>
+    <p>comments: {{comment}}</p>
+    <p class="comments">Comentarios: {{usersComments.length}}</p>
+</div>
+
+<form action="/post/{{_id}}/delete" method="post">
+<button type="submit">Delete: {{namePlace}}</button>
+</form>
+<a href="../post/{{_id}}">Agregar comentario</a><br>
+<a href="../post/{{_id}}/edit"> editar</a>
+{{/each}}
+<h2>My Favorites</h2>
+{{#each user.pinFav}}
+<p>{{user.pinFav}}</p>
+{{/each}}
+
+<button onclick="location.href='/post/new'" type="button" class="btn btn-primary">
+  Make a post</button>
+
+<a href="/home/profile/edit" class="btn btn-primary">Edit</a>
+
+
+  
+>>>>>>> roberto

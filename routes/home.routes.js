@@ -8,41 +8,45 @@ const Comment = require("../models/Comment.model");
 const categoryArr =  ["Restaurant", "Park", "Disco", "Beach", "Pharmacy", "Night Life", "Sports", "Others"]
 
 router.get("/profile", (req, res, next)=> {
-    console.log(req.session.currentUser)
-    let user = req.session.currentUser._id;
-    User.findById(user)
-    .populate("Post Post")
-   // .populate()
-    .then(result => {
-        console.log("user: ", result)
-        res.render("home/profile", result)
+    User.findById(req.session.currentUser._id)
+    .populate("pinPersonal")
+    .populate("pinFav")
+    .populate("interests")
+    .then((user)=>{
+        console.log('PIN PERSONAL:', user.pinPersonal)
+        res.render("home/profile", {user})
     })
-    .catch(err => next(err))
+   .catch(err => next(err));
 });
 
-//router.post("/create-profile", (req,res, next)=>{
+router.get("/profile/edit", (req, res, next) => {
+    User.findById(req.session.currentUser._id)
+    .populate("pinPersonal")
+    .populate("pinFav")
+    .populate("interests")
+    .then((user)=>{
+        res.render("home/edit", {user});
+    })
+   .catch(err => next(err));
+});
 
-//});
+router.post("/profile/edit", (req,res, next)=>{
+    const { city, interests } = req.body;
+
+    User.findByIdAndUpdate(req.session.currentUser._id, {city, interests}, {new: true})
+    .then((user) => {
+        res.render("home/profile", {user})
+    })
+    .catch(err => next(err));
+});
 
 
 
 
 router.get("/map", (req, res, next) => {
-    let latlng = {
-        latitud,
-        longitud
-    }
     Post.find()
         .then(result => {
-            let coordenadasArr = [];
-            result.forEach((post) => {
-                coordenadasArr.push({
-                    latitud: post.latitud,
-                    longitud: post.longitud
-                })
-            })
-            console.log(coordenadasArr);
-            res.render("home/map")
+            res.render("home/map", result)
         })
         .catch(err => next(err))
 
@@ -50,6 +54,14 @@ router.get("/map", (req, res, next) => {
 
 router.post("/map", (req, res, next) => {
     // ESCOGER CATEGORIAS
+})
+
+router.get("/markers", (req, res, next) => {
+    Post.find()
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => next(err))
 })
 
 router.get("/list", (req, res, next) => {
