@@ -21,7 +21,7 @@
     <input type="text" name="comment">
 
     <label for="image">Imagen:</label>
-    <input type="file" name="image" id="image" multiple />
+    <input type="file" name="image" id="image"/>
 
     <button type="submit">Creat new place!</button>
 
@@ -29,6 +29,16 @@
 </form>
 
 <a href="/">Home.</a>
+
+<aside>
+
+<label for="category">Pick a category:</label><br>
+<select name="category" id="category" multiple>
+{{#each categoryArr}}
+  <option value="{{this}}">{{this}}</option><br>
+{{/each}}
+</select>
+</aside>
 
 
 

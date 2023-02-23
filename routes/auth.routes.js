@@ -69,19 +69,11 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
       // Create a user and save it in the database
-<<<<<<< HEAD
-      return User.create({ username: username, password: hashedPassword, city });
-    })
-    .then((user) => {
-      console.log("usuario creado: ", user)
-      res.redirect("/home/profile");
-=======
       return User.create({ username, password: hashedPassword, city });
     })
     .then((user) => {
       console.log("usuario creado: ", user)
       res.redirect("/auth/login");
->>>>>>> 04f1042679e2294af7e4bf7e179a397eb2c3bb08
     })
     .catch((error) => {
       console.log(error)
@@ -106,27 +98,16 @@ router.get("/login", isLoggedOut, (req, res, next) => {
 // POST /auth/login
 router.post("/login", isLoggedOut, (req, res, next) => {
   const { username, password } = req.body;
-<<<<<<< HEAD
   let userData = null;
 
   // Check that username, email, and password are provided
   if (username === "" ||  password === "") {
-=======
-
-  // Check that username, email, and password are provided
-  if (username === "" || password === "") {
->>>>>>> 04f1042679e2294af7e4bf7e179a397eb2c3bb08
     res.status(400).render("auth/login", {
       errorMessage:
         "All fields are mandatory. Please provide username, and password.",
     });
   }
 
-<<<<<<< HEAD
-  if (password.length < 6) {
-    res.render("auth/login", { errorMessage: "Credenciales incorrectas" });
-  }
-=======
   User.find({ password })
     .then(results => {
       if (results.length < 6) {
@@ -135,7 +116,6 @@ router.post("/login", isLoggedOut, (req, res, next) => {
       }
     })
     .catch(err => next(err));
->>>>>>> 04f1042679e2294af7e4bf7e179a397eb2c3bb08
 
   // Search the database for a user with the email submitted in the form
   User.findOne({ username })
@@ -167,21 +147,10 @@ router.post("/login", isLoggedOut, (req, res, next) => {
       req.session.currentUser = userData;
       // Remove the password field
       delete req.session.currentUser.password;
-
-<<<<<<< HEAD
-      res.redirect("/home/profile");
-=======
-          // Add the user object to the session object
-          req.session.currentUser = user.toObject();
-          // Remove the password field
-          delete req.session.currentUser.password;
-
-          res.redirect("/home/list");
+          res.redirect("/home/profile");
         })
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
->>>>>>> 04f1042679e2294af7e4bf7e179a397eb2c3bb08
-    })
-    .catch((err) => next(err));
+   
 });
 
 // GET /auth/logout

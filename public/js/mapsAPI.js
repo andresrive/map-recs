@@ -1,11 +1,8 @@
 // const Post = require("../../models/Post.model")
 
-<<<<<<< HEAD
-let coordenadas = document.getElementById("direction")?.value
+/* let coordenadas = document.getElementById("direction")?.value
 console.log(coordenadas)
-=======
->>>>>>> 04f1042679e2294af7e4bf7e179a397eb2c3bb08
-
+ */
 let marker
 function initMap() {
     if (!coordenadas) {

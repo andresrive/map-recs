@@ -1,23 +1,19 @@
-<<<<<<< HEAD
 <h1>Profile</h1>
 <div class="profile">
-  <img src="{{profilePictureUrl}}" alt="{{username}}" class="profile-picture">
-  <p>{{username}}</p>
+  {{!-- <img src="{{profilePictureUrl}}" alt="{{username}}" class="profile-picture" /> --}}
+  <h2>{{username}}</p>
   <p>{{city}}</p>
 </div>
-    <label for="interests">My interests</label>
-    <input type="text" id="interests" name="interests">
- {{#each }}
-    <h2>Favorites</h2 >
-    <p>{{pinPersonal}}</p>
+<label for="interests">My interests</label>
+<input type="text" id="interests" name="interests" />
+<h2>My Pins</h2>
+{{#each pinPersonal}}
+<p>{{pinPersonal}}</p>
 {{/each}}
-    <h2>My Pins</h2>
-    <p>{{??}}</p>
+<h2>My Favorites</h2>
+{{#each pinFav}}
+<p>{{pinFav}}</p>
+{{/each}}
 
-    <button onclick="location.href='/post/postUser'" type="button" class="btn btn-primary">
-         Create post</button>
-
-  
-=======
-<h1>test</h1>
->>>>>>> 04f1042679e2294af7e4bf7e179a397eb2c3bb08
+<button onclick="location.href='/post/postUser'" type="button" class="btn btn-primary">
+  Create post</button>

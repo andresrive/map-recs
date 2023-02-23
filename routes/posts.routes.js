@@ -7,15 +7,21 @@ const User = require("../models/User.model");
 const Post = require("../models/Post.model");
 const Comment = require("../models/Comment.model");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const isLoffedOut = require("../middleware/isLoggedOut");
+const categoryArr =  ["Restaurant", "Park", "Disco", "Beach", "Pharmacy", "Night Life", "Sports", "Others"]
 
 router.get("/new", (req, res, next) => {
-  res.render("post/new-post");
+  let data = {
+      categoryArr
+  }
+  console.log(data)
+  res.render("post/new-post", data);
 });
 
-router.post("/new", upload.any(), (req, res, next) => {
+router.post("/new", upload.single('image'), (req, res, next) => {
   let author = req.session.currentUser._id;
   let { namePlace, nameCategory, direction, comment, latitud, longitud } = req.body;
-  console.log("la foto:", req.files)
+  //console.log("la foto:", req.file)
   if (
     namePlace == "" ||
     nameCategory == "" ||
@@ -27,7 +33,7 @@ router.post("/new", upload.any(), (req, res, next) => {
     });
     return;
   }
-  if (req.files) {
+  if (req.file) {
     Post.create({
       namePlace,
       nameCategory,
@@ -35,7 +41,7 @@ router.post("/new", upload.any(), (req, res, next) => {
       comment,
       latitud,
       longitud,
-      image: req.files[0].path,
+      image: req.file.path,
       author
     })
       .then((response) => {
@@ -121,10 +127,10 @@ router.get("/:id/edit", isLoggedIn, (req, res, next) => {
     .catch((err) => next(err));
 });
 
-router.get("/:id/edit/pre", isLoggedIn, (req, res, next) => {
-  //console.log("PRIMER CONSOL:", req.query);
+router.get("/:id/edit/pre", /* upload.single('image'), */ isLoggedIn, (req, res, next) => {
+  //console.log("PRIMER CONSOL:", req.file);
   let { namePlace, nameCategory, direction, comment } = req.query;
-  //let image = req.body.path
+  //let image = req.file.path;
   let postId = req.params.id;
   Post.findByIdAndUpdate(
     postId,
@@ -133,7 +139,7 @@ router.get("/:id/edit/pre", isLoggedIn, (req, res, next) => {
       nameCategory,
       direction,
       comment,
-      image
+      //image
     },
     { new: true }
   )
