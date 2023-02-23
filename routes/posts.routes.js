@@ -12,10 +12,11 @@ router.get("/new", (req, res, next) => {
   res.render("post/new-post");
 });
 
-router.post("/new", upload.any(), (req, res, next) => {
+router.post("/new", /*upload.any(),*/ (req, res, next) => {
   let author = req.session.currentUser._id;
   let { namePlace, nameCategory, direction, comment, latitud, longitud } = req.body;
   console.log("la foto:", req.files)
+  console.log(req.body);
   if (
     namePlace == "" ||
     nameCategory == "" ||
@@ -27,7 +28,7 @@ router.post("/new", upload.any(), (req, res, next) => {
     });
     return;
   }
-  if (req.files) {
+  if (req.files.length !== 0) {
     Post.create({
       namePlace,
       nameCategory,
@@ -39,8 +40,7 @@ router.post("/new", upload.any(), (req, res, next) => {
       author
     })
       .then((response) => {
-
-
+        console.log(author, response._id);
         return User.findByIdAndUpdate(author, {
           $push: { pinPersonal: response._id },
         });
@@ -159,7 +159,7 @@ router.post("/:id/delete", isLoggedIn, (req, res, next) => {
   let postId = req.params.id;
   Post.findByIdAndDelete(postId)
     .then((result) => {
-      res.redirect("/home/list");
+      res.redirect("back");
     })
     .catch((err) => next(err));
 });
