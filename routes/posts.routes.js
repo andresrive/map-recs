@@ -18,7 +18,6 @@ router.get("/new", (req, res, next) => {
   res.render("post/new-post", data);
 });
 
-router.post("/new", /*upload.any(),*/ (req, res, next) => {
 router.post("/new", upload.single('image'), (req, res, next) => {
   let author = req.session.currentUser._id;
   let { namePlace, nameCategory, direction, comment, latitud, longitud } = req.body;
