@@ -13,19 +13,14 @@ const categoryArr = ["Restaurant", "Park", "Disco", "Beach", "Pharmacy", "Night 
 
 
 router.get("/new", isLoggedIn, (req, res, next) => {
-  let data = {
-    categoryArr
-  }
-  console.log(data)
-  res.render("post/new-post", data);
+  res.render("post/new-post", { data: categoryArr });
 });
 
-router.post("/new", isLoggedIn, upload.single('image'), (req, res, next) => {
+router.post("/new", upload.single('image'), (req, res, next) => {
   let author = req.session.currentUser._id;
   let { namePlace, nameCategory, direction, comment, latitud, longitud } = req.body;
-  console.log("la foto:", req.files)
+  console.log("la foto:", req.file)
   console.log(req.body);
-  //console.log("la foto:", req.file)
   if (
     namePlace == "" ||
     nameCategory == "" ||
@@ -58,7 +53,7 @@ router.post("/new", isLoggedIn, upload.single('image'), (req, res, next) => {
       .catch((err) => next(err));
   } else {
     res.render("post/new-post", {
-      message: "FAlta algun campo por completar!"
+      message: "Falta subir una imagen"
     })
   }
 
