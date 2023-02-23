@@ -7,18 +7,20 @@
             {{#each result}}
             <div class="col col-sm-6 col-md-4">
                 <div>
-                    <div class="card" style="width: 13.75rem;"></div>
-                    <img src="{{image}}" alt="{{image}}" class="img-circle" width="220" height="220">
-                    <div class="card-body"></div>
-                    <h3 class="card-title">{{namePlace}}</h3>
-                    <p class="card-text">{{nameCategory}}</p>
-                    <p class="card-text">{{direction}}</p>
-                    <p class="card-text">{{comment}}</p>
-                    <p class="comments" class="card-text">Comentarios: {{usersComments.length}}</p>
-                </div>
-                <div class="card-body">
-                    <a href="../post/{{_id}}" class="link-dark">Agregar comentario</a>
-                    <a href="../post/{{_id}}/edit" class="link-info"> editar</a>
+                    <div class="card" style="width: 13.75rem;">
+                        <img src="{{image}}" alt="{{image}}" class="img-thumbnail" width="220" height="220">
+                        <div class="card-body">
+                            <h3 class="card-title">{{namePlace}}</h3>
+                            <p class="card-text">{{nameCategory}}</p>
+                            <p class="card-text">{{direction}}</p>
+                            <p class="card-text">{{comment}}</p>
+                            <p class="comments" class="card-text">Comentarios: {{usersComments.length}}</p>
+                        </div>
+                        <div class="card-body">
+                            <a href="../post/{{_id}}" class="link-dark">Agregar comentario</a>
+                            <a href="../post/{{_id}}/edit" class="link-info"> editar</a>
+                        </div>
+                    </div>
                 </div>
                 {{#if userRol}}
                 <form action="/post/{{_id}}/delete" method="post">

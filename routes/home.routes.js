@@ -33,7 +33,12 @@ router.get("/profile/edit", (req, res, next) => {
 
 router.post("/profile/edit",upload.single('image'), (req,res, next)=>{
     const { city, interests } = req.body;
-    const image = req.file.path
+    let image;
+    if (!req.file) {
+        image = req.session.currentUser.path
+    } else {
+        image = req.file.path
+    }
     console.log(image)
     User.findByIdAndUpdate(req.session.currentUser._id, {city, interests, image}, {new: true})
     .then((user) => {
