@@ -21,16 +21,20 @@
     </div>
 </nav>
 
-<h2>Edit profile</h2>
 
-<form method="post" enctype="multipart/form-data">
-    <input type="file" name="image" value="{{image}}" />
-    <br>
-    <label for="city">City</label>
-    <input name="city" value="{{user.city}}">
-    <br>
-    <label for="interests">Interests</label>
-    <input name="interests" value="{{user.interests}}">
-    <br>
-    <button>Save</button>
-</form>
+<div class="container">
+    <dir class="row">
+        <div class="col align-self-center">
+            <br>
+            <h2>Edit profile</h2>
+            <form action="hmoe/profile/edit" method="post" enctype="multipart/form-data">
+                <label for="image" class="heading">Avatar:</label>
+                <input class="input" type="file" name="image" value="{{image}}" /><br>
+                <label class="heading">City:</label>
+                <input class="input" name="city" value="{{user.city}}"><br>
+                <label class="heading">Interests:</label>
+                <input class="input" name="interests" value="{{user.interests}}"><br>
+                <button type="submit" class="bttn">Save changes</button>
+            </form>
+        </div>
+</div>

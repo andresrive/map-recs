@@ -16,7 +16,7 @@ router.get("/new", isLoggedIn, (req, res, next) => {
   res.render("post/new-post", { data: categoryArr });
 });
 
-router.post("/new", upload.single('image'), (req, res, next) => {
+router.post("/new", isLoggedIn, upload.single('image'), (req, res, next) => {
   let author = req.session.currentUser._id;
   let { namePlace, nameCategory, direction, comment, latitud, longitud } = req.body;
   console.log("la foto:", req.file)

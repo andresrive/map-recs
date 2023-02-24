@@ -21,6 +21,66 @@
   </div>
 </nav>
 
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 text-center">
+      <div class="card border bg-light">
+        <img id="post-photo" src="{{post.image}}" alt="{{post.namePlace}}" class="img-thumbnail">
+      </div>
+      <div>
+        <div class="card-body">
+          <br>
+          <h2>{{post.namePlace}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <br>
+  <p style="margin-left: 100px;"><i>{{post.direction}}</i></p>
+  <p style="margin-left: 100px;">{{post.comment}}</p>
+  <p style="margin-left: 100px;"> Posted by: {{post.author.username}}</p>
+  <br>
+</div>
+
+<br>
+{{#unless post.usersComments}}
+<p style="margin-left: 100px;">No comments yet!</p>
+{{/unless}}
+
+<h3 style="margin-left: 100px;">Comments</h3>
+
+{{#each post.usersComments}}
+<p style="margin-left: 100px;"><b>{{this.title}}:</b> {{this.comment}}</p>
+{{/each}}
+
+<br>
+<h3 style="margin-left: 100px;">Add comment</h3>
+
+<form action="/post/{{post._id}}" method="post">
+  <label style="margin-left: 100px;">{{user}}</label>
+  <input type="text" name="title" placeholder="Write a title..">
+  <input type="text" name="comment" placeholder="Write you comment here..." />
+
+  <button type="submit" class="bttn">Comment</button>
+</form>
+
+<br>
+
+
+
+{{!-- <a style="margin-left: 100px;" href="{{post.author._id}}/post"><button class="bttn">See all
+    {{post.author.username}}'s
+    posts </button></a> --}}
+
+{{!-- //CAMBIA
+
 <h2>{{post.namePlace}}</h2>
 <div>
   <p>{{post.comment}}</p>
@@ -52,3 +112,6 @@
 <br>
 
 <a href="{{post.author._id}}/post"><button class="bttn">See all {{post.author.username}}'s posts </button></a>
+
+
+// --------------------------- --}}
