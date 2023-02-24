@@ -172,4 +172,8 @@ body {
   box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
 }
 
+#post-photo {
+width: 400px;
+height: auto;
+}
 
