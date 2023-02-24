@@ -2,16 +2,20 @@
     body {
         background-image: url("/images/fondoPantallas.avif");
         background-size: cover;
+        background-repeat: no-repeat;
     }
 </style>
 
-<h1>Welcome to MapRecs!</h1>
 
 
-<a href="/auth/signup"><button class="bttn">Sign up</button></a>
-<a href="/auth/login"><button class="bttn">Log in</button></a>
+<div id="divindex">
+    <h1>Welcome to MapRecs!</h1>
+</div>
 
+<div id="divcredentials">
+    <div>
+        <a href="/auth/signup"><button class="bttn" id="signup">Sign up</button></a>
 
-<a href="/post/new">new</a>
-<a href="/auth/logout">Log out</a>
-<a href="/home/list">lista de posts</a>
+        <a href="/auth/login"><button class="bttn" id="login">Log in</button></a>
+    </div>
+</div>

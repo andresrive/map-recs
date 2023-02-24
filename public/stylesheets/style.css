@@ -6,16 +6,12 @@ a {
   color: #00b7ff;
 }
 
-h1 {
-  color: 15px;
-}
-
 /* 
  * Always set the map height explicitly to define the size of the div element
  * that contains the map. 
  */
  #map {
-  height: 80%;
+  height: 94%;
 }
 
 /* 
@@ -26,7 +22,34 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  /* font-family: 'Poppins', sans-serif; */
+
 }
+
+
+
+#divindex h1 {
+  text-align: center;
+  padding-top: 10rem;
+  font-weight: bolder;
+  font-size: 5rem;
+  color: #e63946;
+  -webkit-text-stroke: 1px black
+}
+
+#divcredentials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem ;
+}
+
+#signup, #login {
+  padding: 1rem 2rem;
+  margin: 0 1rem;
+  font-size: 2rem;
+}
+
 
 #hidden {
   display:none
@@ -170,6 +193,39 @@ body {
   color: black;
   transition: .4s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+}
+
+#card-body-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-body a, .card-body form, .card-body button {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+#img-default, #img-propia {
+  width: 200px;
+  height: 200px;
+}
+
+#italic {
+  font-style: italic;
+}
+
+#pinspics{
+  height: 220px
+}
+
+#newpost {
+  margin-top: 12rem;
+}
+
+.marginForForms {
+  margin: 0;
+  margin-top: 2rem
 }
 
 

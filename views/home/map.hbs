@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark-subtle">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">MapRecs</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -13,28 +13,48 @@
         <li class="nav-item">
           <a class="nav-link" href="/home/profile">Profile</a>
         </li>
-        <li class="nav-item dropdown">
+        <label for="category" class="nav-item dropdown dropdown-menu">Categories</label><br />
+        {{!-- <select name="category" id="category">
+          {{#each categoryArr}}
+          <option class="dropdown-item" name="{{this}}" value="{{this}}">{{this}}</option><br />
+          {{/each}}
+        </select> --}}
+        {{!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categories
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Restaurant</a></li>
-            <li><a class="dropdown-item" href="#">Park</a></li>
-            <li><a class="dropdown-item" href="#">Disco</a></li>
-            <li><a class="dropdown-item" href="#">Beach</a></li>
-            <li><a class="dropdown-item" href="#">Night Life</a></li>
-            <li><a class="dropdown-item" href="#">Pharmacy</a></li>
-            <li><a class="dropdown-item" href="#">Sports</a></li>
-            <li><a class="dropdown-item" href="#">Others</a></li>
-          </ul>
+            {{#each categoryArr}}
+            <li>
+              <form action="/home/map" method="POST">
+                <button class="dropdown-item" type="submit" name="nameCategory" value="{{this}}">{{this}}</button>
+              </form>
+            </li>
+            {{/each}} --}}
+            {{!--
+          </ul> --}}
+          {{!-- <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/home/map" name="Restaurant">Restaurant</a></li>
+            <li><a class="dropdown-item" href="/home/map" name="">Park</a></li>
+            <li><a class="dropdown-item" href="/home/map" name="">Disco</a></li>
+            <li><a class="dropdown-item" href="/home/map" name="">Beach</a></li>
+            <li><a class="dropdown-item" href="/home/map" name="">Night Life</a></li>
+            <li><a class="dropdown-item" href="/home/map" name="">Pharmacy</a></li>
+            <li><a class="dropdown-item" href="/home/map" name="">Sports</a></li>
+            <li><a class="dropdown-item" href="/home/map" name="">Others</a></li>
+          </ul> --}}
         </li>
       </ul>
       <div id="pac-container">
         <input class="form-control me-2" id="pac-input" type="text" placeholder="Search..." />
       </div>
+
     </div>
   </div>
 </nav>
+
+
+
 
 <div id="map" class="container-fluid"></div>
 

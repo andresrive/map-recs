@@ -14,7 +14,7 @@ const User = require("../models/User.model");
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
-const image = ("images/perfilDef.jpg")
+
 // GET /auth/signup
 router.get("/signup", isLoggedOut, (req, res, next) => {
   res.render("auth/signup");
@@ -22,7 +22,7 @@ router.get("/signup", isLoggedOut, (req, res, next) => {
 
 // POST /auth/signup
 router.post("/signup", isLoggedOut, (req, res, next) => {
-  console.log(req.body)
+  //console.log(req.body)
   const { username, password, passwordRepeat, city, codigoUser } = req.body;
 
   // Check that username, password, and city are provided
@@ -70,9 +70,9 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
     .then((hashedPassword) => {
       // Create a user and save it in the database
       if (codigoUser == "admin") {
-        return User.create({ username, password: hashedPassword, city, admin: true, image });
+        return User.create({ username, password: hashedPassword, city, admin: true });
       }
-      return User.create({ username, password: hashedPassword, city, admin: false, image });
+      return User.create({ username, password: hashedPassword, city, admin: false });
     })
     .then((user) => {
       console.log("usuario creado: ", user)
@@ -104,7 +104,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   let userData = null;
 
   // Check that username, email, and password are provided
-  if (username === "" ||  password === "") {
+  if (username === "" || password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
         "All fields are mandatory. Please provide username, and password.",
@@ -123,7 +123,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           .status(400)
           .render("auth/login", { errorMessage: "Wrong credentials." });
 
-          return;
+        return;
       }
 
       userData = user;
