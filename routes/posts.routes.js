@@ -101,9 +101,10 @@ router.get("/:id", isLoggedIn, (req, res, next) => {
 
 router.post("/:id", isLoggedIn, (req, res, next) => {
   //console.log("params:", req.params)
+  let author = req.session.currentUser._id;
   let postId = req.params.id;
   let { title, comment } = req.body;
-  Comment.create({ title, comment })
+  Comment.create({ title, comment, author })
     .then((response) => {
       //console.log("respo:", response._id);
       return Post.findByIdAndUpdate(postId, {
