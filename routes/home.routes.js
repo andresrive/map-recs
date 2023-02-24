@@ -96,16 +96,12 @@ router.get("/markers", isLoggedIn, (req, res, next) => {
 })
 
 router.get("/list", isLoggedIn, (req, res, next) => {
-    //let userId = req.session.currentUser._id
     Post.find()
         .then(result => {
             let data = {
                 result: result.map(resu => {
                     if (resu.author == req.session.currentUser._id || req.session.currentUser.admin) {
                         resu.userRol = true
-                    }
-                    if (resu.author == req.session.currentUser._id || req.session.currentUser.admin) {
-                        resu.userOk = true
                     }
                     return resu
                 }),
