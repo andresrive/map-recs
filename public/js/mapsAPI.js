@@ -28,7 +28,7 @@ function initMap() {
 
     autocomplete.bindTo("bounds", map);
 
-    axios.get("http://localhost:3000/home/markers")
+    axios.get(`${process.env.URLHOST}/home/markers`)
         .then(response => {
             response.data.forEach(post => {
                 let latLng = {
