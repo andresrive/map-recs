@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark-subtle">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">MapRecs</a>
@@ -41,10 +42,22 @@
     <a href="/home/profile/edit"><button class="bttn">Edit your profile</button></a>
     <a href="/auth/logout"><button class="bttn">Log out</button></a>
   </div>
+=======
+<div class="profile">
+  <h1 style="margin-left: 100px;">{{user.username}}'s Profile</h1>
+  <h2 style="margin-left: 100px;">City: {{user.city}}</h2>
+  
+>>>>>>> roberto
 </div>
+<h2 style="margin-left: 100px;">My interests</h2>
+<p style="margin-left: 100px;">{{user.interests}}</p>
+<h2 style="margin-left: 100px;">My Pins</h2><br>
+{{#each user.pinPersonal}}
+
 
 <div class="container">
   <div class="row">
+<<<<<<< HEAD
     <h2>My Pins</h2>
     {{#each user.pinPersonal}}
     <div class="col col-sm-6 col-lg-4 col-xl-3">
@@ -69,3 +82,61 @@
     {{/each}}
   </div>
 </div>
+=======
+    <div class="col col-sm-6 col-md-4">
+      <div class="card" style="width: 13.75rem;">
+        <img src="{{image}}" alt="{{image}}" class="img-thumbnail" width="220" height="220">
+        <div class="card-body">
+          <h3 class="card-title">{{namePlace}}</h3>
+          <p class="card-text">Category: {{nameCategory}}</p>
+          <p class="card-text">Direction: {{direction}}</p>
+          <p class="card-text">comments: {{comment}}</p>
+          <p class="comments">Comentarios: {{usersComments.length}}</p>
+          <form action="/post/{{_id}}/delete" method="post">
+<button style="margin-left: 100px;" type="submit">Delete: {{namePlace}}</button>
+</form>
+<a style="margin-left: 100px;" href="../post/{{_id}}">Agregar comentario</a><br>
+<a style="margin-left: 100px;" href="../post/{{_id}}/edit"> editar</a>
+</div>
+        </div>
+      </div>
+      </div>
+
+
+
+{{!-- 
+<div class="border border-2">
+    <h2 style="margin-left: 100px;">{{namePlace}}</h2>
+    <p style="margin-left: 100px;">Category: {{nameCategory}}</p>
+    <p style="margin-left: 100px;">Direction: {{direction}}</p>
+    <p style="margin-left: 100px;">comments: {{comment}}</p>
+    <p style="margin-left: 100px;" class="comments">Comentarios: {{usersComments.length}}</p> --}}
+
+
+<br>
+{{/each}}
+<h2 style="margin-left: 100px;">My Favorites</h2>
+{{#each user.pinFav}}
+<p>{{user.pinFav}}</p>
+{{/each}}
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <button class="btn btn-primary float-right"style="margin-left: 100px;" onclick="location.href='/post/new'" type="button" class="btn btn-primary">
+  Make a post</button>
+  <a href="/home/profile/edit" class="btn btn-primary">Edit</a>
+
+    </div>
+  </div>
+</div>
+
+
+<a href="/home/profile/edit" class="btn btn-primary">Edit</a>
+
+
+  
+>>>>>>> roberto

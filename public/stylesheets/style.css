@@ -228,4 +228,41 @@ body {
   margin-top: 2rem
 }
 
+#card-body-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-body a, .card-body form, .card-body button {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+#img-default, #img-propia {
+  width: 200px;
+  height: 200px;
+}
+
+#italic {
+  font-style: italic;
+}
+
+#pinspics{
+  height: 220px
+}
+
+#newpost {
+  margin-top: 12rem;
+}
+
+.marginForForms {
+  margin: 0;
+  margin-top: 2rem
+}
+
+#post-photo {
+width: 400px;
+height: auto;
+}
 

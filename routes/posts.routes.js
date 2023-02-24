@@ -21,6 +21,7 @@ router.post("/new", upload.single('image'), (req, res, next) => {
   let { namePlace, nameCategory, direction, comment, latitud, longitud } = req.body;
   console.log("la foto:", req.file)
   console.log(req.body);
+  //console.log("la foto:", req.file)
   if (
     namePlace == "" ||
     nameCategory == "" ||

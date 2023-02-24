@@ -87,6 +87,14 @@ router.post("/map", isLoggedIn, (req, res, next) => {
     }) */
 })
 
+router.get("/markers", (req, res, next) => {
+    Post.find()
+        .then(result => {
+            res.json(result);
+        })
+        .catch(err => next(err))
+})
+
 router.get("/markers", isLoggedIn, (req, res, next) => {
     Post.find()
         .then(result => {

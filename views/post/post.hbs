@@ -21,7 +21,6 @@
   </div>
 </nav>
 
-<h2>{{post.namePlace}}</h2>
 <div>
   <p>{{post.comment}}</p>
   <p><i>{{post.direction}}</i></p>
@@ -39,7 +38,7 @@
 <p><i>{{this.author}}</i> <br> <b>{{this.title}}:</b> {{this.comment}}</p>
 {{/each}}
 
-<h3>Add comment</h3>
+<h3 style="margin-left: 100px;">Add comment</h3>
 
 <form action="/post/{{post._id}}" method="post">
   <label>{{user}}</label>
