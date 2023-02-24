@@ -1,3 +1,26 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark-subtle">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MapRecs</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/home/map">Map</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/list">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/profile">Profile</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <h2>Edit {{namePlace}}'s data</h2>
 <br />
 <div class="container">
@@ -13,21 +36,21 @@
           <p class="comments">Comentarios: {{usersComments.length}}</p>
         </div>
       </div>
-      </div>
-      <div class="col col-sm-6 col-md-4 ">
-      <form action="/post/{{_id}}/edit/pre" method="get" enctype="multipart/form-data"/>
-        <p class="heading">New information:</p>
-        <input class="input" type="text" name="namePlace" value="{{namePlace}}" /> <br>
-        <br>
-        <input class="input" type="text" name="nameCategory" value="{{nameCategory}}" /> <br>
-        <br>
-        <input class="input" type="text" name="direction" value="{{direction}}" /> <br> 
-        <br>
-        <input class="input" type="text" name="comment" name="comment" value="{{comment}}" /> <br>
-        <br>
-        <input class="bttn" type="file" name="image" value="{{image}}" />
-        <br>
-        <button type="submit" class="bttn">Edit your post!</button>
+    </div>
+    <div class="col col-sm-6 col-md-4 ">
+      <form action="/post/{{_id}}/edit/pre" method="get" enctype="multipart/form-data" />
+      <p class="heading">New information:</p>
+      <input class="input" type="text" name="namePlace" value="{{namePlace}}" /> <br>
+      <br>
+      <input class="input" type="text" name="nameCategory" value="{{nameCategory}}" /> <br>
+      <br>
+      <input class="input" type="text" name="direction" value="{{direction}}" /> <br>
+      <br>
+      <input class="input" type="text" name="comment" name="comment" value="{{comment}}" /> <br>
+      <br>
+      {{!-- <input class="bttn" type="file" name="image" value="{{image}}" /> --}}
+      <br>
+      <button type="submit" class="bttn">Edit your post!</button>
 
       </form>
     </div>

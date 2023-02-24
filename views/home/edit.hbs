@@ -1,14 +1,40 @@
-<h1>Edit profile</h1>
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark-subtle">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MapRecs</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/map">Map</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/list">List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/profile">Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<form method="post" enctype="multipart/form-data">
-    <input type="file" name="image" value="{{image}}" />
-    <br>
-    <label for="city">City</label>
-    <input name="city" value="{{user.city}}">
-<br>
-    <label for="interests">Interests</label>
-    <input name="interests" value="{{user.interests}}">
-<br>
-    <button>Save</button>
-</form>
-  
+
+<div class="container">
+    <dir class="row">
+        <div class="col align-self-center">
+            <br>
+            <h2>Edit profile</h2>
+            <form action="hmoe/profile/edit" method="post" enctype="multipart/form-data">
+                <label for="image" class="heading">Avatar:</label>
+                <input class="input" type="file" name="image" value="{{image}}" /><br>
+                <label class="heading">City:</label>
+                <input class="input" name="city" value="{{user.city}}"><br>
+                <label class="heading">Interests:</label>
+                <input class="input" name="interests" value="{{user.interests}}"><br>
+                <button type="submit" class="bttn">Save changes</button>
+            </form>
+        </div>
+</div>

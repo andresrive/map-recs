@@ -1,32 +1,117 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-dark-subtle">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MapRecs</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/home/map">Map</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/list">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/profile">Profile</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 text-center">
+      <div class="card border bg-light">
+        <img id="post-photo" src="{{post.image}}" alt="{{post.namePlace}}" class="img-thumbnail">
+      </div>
+      <div>
+        <div class="card-body">
+          <br>
+          <h2>{{post.namePlace}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <br>
+  <p style="margin-left: 100px;"><i>{{post.direction}}</i></p>
+  <p style="margin-left: 100px;">{{post.comment}}</p>
+  <p style="margin-left: 100px;"> Posted by: {{post.author.username}}</p>
+  <br>
+</div>
+
+<br>
+{{#unless post.usersComments}}
+<p style="margin-left: 100px;">No comments yet!</p>
+{{/unless}}
+
+<h3 style="margin-left: 100px;">Comments</h3>
+
+{{#each post.usersComments}}
+<p style="margin-left: 100px;"><b>{{this.title}}:</b> {{this.comment}}</p>
+{{/each}}
+
+<br>
+<h3 style="margin-left: 100px;">Add comment</h3>
+
+<form action="/post/{{post._id}}" method="post">
+  <label style="margin-left: 100px;">{{user}}</label>
+  <input type="text" name="title" placeholder="Write a title..">
+  <input type="text" name="comment" placeholder="Write you comment here..." />
+
+  <button type="submit" class="bttn">Comment</button>
+</form>
+
+<br>
+
+
+
+{{!-- <a style="margin-left: 100px;" href="{{post.author._id}}/post"><button class="bttn">See all
+    {{post.author.username}}'s
+    posts </button></a> --}}
+
+{{!-- //CAMBIA
 
 <h2>{{post.namePlace}}</h2>
 <div>
   <p>{{post.comment}}</p>
-  <br>
- <p> Created by {{post.author.username}}</p>
+  <p><i>{{post.direction}}</i></p>
+  <p> Created by {{post.author.username}}</p>
 </div>
 <div class="imagePlace">
-    <img src="{{post.image}}" alt="{{post.namePlace}}">
+  <img src="{{post.image}}" alt="{{post.namePlace}}">
 </div>
 <br>
 {{#unless post.usersComments}}
-  <p>No comments yet!</p>
+<p>No comments yet!</p>
 {{/unless}}
 
 {{#each post.usersComments}}
-  <p><b>{{this.title}}:</b> {{this.comment}}</p>
+<p><i>{{this.author}}</i> <br> <b>{{this.title}}:</b> {{this.comment}}</p>
 {{/each}}
 
 <h3>Add comment</h3>
 
 <form action="/post/{{post._id}}" method="post">
-  <label> Current User: {{user}}</label>
+  <label>{{user}}</label>
   <input type="text" name="title" placeholder="Write a title..">
-  <input type="text" name="comment" placeholder="Write you comment here..."/>
+  <input type="text" name="comment" placeholder="Write you comment here..." />
 
-  <button type="submit">Comment</button>
+  <button type="submit" class="bttn">Comment</button>
 </form>
 
 <br>
 
-<a href="{{post.author._id}}/post">See all {{post.author.username}}'s posts </a>
+<a href="{{post.author._id}}/post"><button class="bttn">See all {{post.author.username}}'s posts </button></a>
+
+
+// --------------------------- --}}
