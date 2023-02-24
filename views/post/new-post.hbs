@@ -24,7 +24,41 @@
 {{message}}
 
 
-<form action="/post/new" method="POST" enctype="multipart/form-data">
+<div id="newpost" class="d-flex justify-content-center">
+    <form action="/post/new" method="POST" class="form" enctype="multipart/form-data">
+
+        <input class="input" placeholder="Title" type="text" name="namePlace">
+
+        <select class="form-select" style="background-color: whitesmoke; color:slategray; font-size:0.9rem"
+            name="nameCategory" id="category">
+            <option value="" disabled selected hidden>Choose a category</option>
+            {{#each data}}
+            <option value="{{this}}">{{this}}</option><br>
+            {{/each}}
+        </select>
+
+        <input class="input" placeholder="Address" type="text" id="auto-direction" name="direction">
+
+
+        <input type="hidden" id="latitud" name="latitud">
+
+
+        <input type="hidden" id="longitud" name="longitud">
+
+        <input class="input" placeholder="Comment" type="text" name="comment">
+
+        <label for="image">Imagen:</label>
+        <input type="file" name="image" id="image" />
+
+        <button type="submit" class="bttn">Creat new place!</button>
+
+
+    </form>
+</div>
+
+
+
+{{!-- <form action="/post/new" method="POST" enctype="multipart/form-data">
     <label for="namePlace">Title:</label>
     <input type="text" name="namePlace">
 
@@ -53,14 +87,9 @@
     <button>Creat new place!</button>
 
 
-</form>
-
-<a href="/">Home.</a>
+</form> --}}
 
 
-
-{{!--
-<script src="/js/autocompleteForm.js"></script> --}}
 
 
 

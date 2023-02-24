@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/home/profile">Profile</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/list">List</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -59,16 +62,25 @@
 <div class="container">
     <div class="row">
         {{#each result}}
-        <div class="col col-sm-6 col-md-4">
-            <div>
-                <div class="card" style="width: 13.75rem;"></div>
+        <div class="col col-sm-6 col-lg-4 col-xl-3">
+            <div class="card" style="width: 13.75rem; height: 35rem; margin: 3rem auto">
                 <img src="{{image}}" alt="{{image}}" class="img-circle" width="220" height="220">
-                <div class="card-body"></div>
-                <h3 class="card-title">{{namePlace}}</h3>
-                <p class="card-text">{{nameCategory}}</p>
-                <p class="card-text">{{direction}}</p>
-                <p class="card-text">{{comment}}</p>
-                <p class="comments" class="card-text">Comentarios: {{usersComments.length}}</p>
+                <div class="card-body">
+                    <h3 class="card-title">{{namePlace}}</h3>
+                    <p id="italic" class="card-text">{{nameCategory}}</p>
+                    <p class="card-text">{{direction}}</p>
+                    <p class="card-text">{{comment}}</p>
+                    <p class="comments" class="card-text">Comentarios: {{usersComments.length}}</p>
+                </div>
+                <div class="card-body">
+                    <a href="../post/{{_id}}"><button class="bttn">Open post</button></a>
+                    <a href="../post/{{_id}}/edit"><button class="bttn">Edit post</button></a>
+                    {{#if userRol}}
+                    <form action="/post/{{_id}}/delete" method="post">
+                        <button style="margin-left: 40px" type="submit" class="btn btn-danger">Delete post</button>
+                    </form>
+                    {{/if}}
+                </div>
             </div>
             <div class="card-body">
                 <a href="../post/{{_id}}" class="link-dark">Agregar comentario</a>
@@ -85,12 +97,3 @@
         {{/each}}
     </div>
 </div>
-
-<aside>
-    <label for="category">Pick a category:</label><br />
-    <select name="category" id="category">
-        {{#each categoryArr}}
-        <option value="{{this}}">{{this}}</option><br />
-        {{/each}}
-    </select>
-</aside>

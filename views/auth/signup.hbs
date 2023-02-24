@@ -1,49 +1,13 @@
-{{!-- <h2>Sign Up</h2>
-<form action="/auth/signup" method="POST" class="w-50 mx-auto">
-    {{#if mensajeError}}
-    <div class="alert alert-danger" role="alert">
-        {{mensajeError}}
-    </div>
-    {{/if}}
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
-        <label for="floatingInput">Name</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="city" name="city">
-        <label for="floatingInput">City</label>
-    </div>
-
-    <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="floatingPassword" name="password">
-        <label for="floatingPassword">Password</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="floatingPassword" name="passwordRepeat">
-        <label for="floatingPassword">Repeat password</label>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Sign up</button>
-
-    <button onclick="location.href='/auth/login'" type="button" class="btn btn-primary">
-        I already signed up. I need to log in</button>
-
-
-    {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
-    {{/if}}
-</form> --}}
-
-
 <style>
     body {
         background-image: url("/images/fondoPantallas.avif");
         background-size: cover;
+        background-repeat: no-repeat;
     }
 </style>
 
 <div class="d-flex justify-content-center ">
-    <form action="/auth/signup" method="POST" class="form">
+    <form action="/auth/signup" method="POST" class="form marginForForms">
         {{#if mensajeError}}
         <div class="alert alert-danger" role="alert">
             {{mensajeError}}
@@ -54,8 +18,8 @@
         <input class="input" placeholder="City" type="text" name="city">
         <input class="input" placeholder="Password" type="password" name="password">
         <input class="input" placeholder="Password" type="password" name="passwordRepeat">
-        <input type="text" placeholder="Ingrese su codigo." name="codigoUser" class="input">
-    <button type="submit" class="bttn">Sign up</button>
+        <input type="text" placeholder="Insert admin code" name="codigoUser" class="input">
+        <button type="submit" class="bttn">Sign up</button>
         <button onclick=location.href='/auth/login' type="button" class="bttn">Log in</button>
 
         {{#if errorMessage}}
