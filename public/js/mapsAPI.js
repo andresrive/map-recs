@@ -24,7 +24,7 @@ function initMap() {
 
     const autocomplete = new google.maps.places.Autocomplete(input, options);
 
-    const SERVER_URL = process.env.URLHOST || "https://map-recs.fly.dev/"
+    const SERVER_URL = "https://map-recs.fly.dev"
 
     autocomplete.bindTo("bounds", map);
 
