@@ -24,11 +24,11 @@ function initMap() {
 
     const autocomplete = new google.maps.places.Autocomplete(input, options);
 
-
+    const SERVER_URL = process.env.URLHOST || "https://map-recs.fly.dev/"
 
     autocomplete.bindTo("bounds", map);
 
-    axios.get(`${process.env.URLHOST}/home/markers`)
+    axios.get(`${SERVER_URL}/home/markers`)
         .then(response => {
             response.data.forEach(post => {
                 let latLng = {
